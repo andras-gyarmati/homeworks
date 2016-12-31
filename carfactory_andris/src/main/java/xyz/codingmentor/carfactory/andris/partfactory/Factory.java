@@ -48,7 +48,7 @@ public class Factory {
         return tmpClasses;
     }
 
-    private String currentTime(){
+    private static String currentTime(){
          return " time: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
     }
     
