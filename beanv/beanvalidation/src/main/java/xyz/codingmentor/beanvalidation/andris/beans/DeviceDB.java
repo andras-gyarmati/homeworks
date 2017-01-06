@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public class DeviceDB {
 
     public void addDevice(DeviceEntity device) {
         if (null != devices.get(device.getId())) {
-            throw new IllegalArgumentException("Error! Already stored item.");
+            throw new DeviceAlreadyStoredException("Error! Already stored item.");
         }
         device.setId(UUID.randomUUID().toString());
         device.setCount(0);
@@ -27,7 +26,7 @@ public class DeviceDB {
 
     public DeviceEntity editDevice(DeviceEntity device) {
         if (null == devices.get(device.getId())) {
-            throw new NoSuchElementException();
+            throw new DeviceNotFoundException("Error! Device: " + device.getId() + " is can not be found!");
         }
         this.devices.put(device.getId(), device);
         return getDevice(device.getId());
@@ -35,7 +34,7 @@ public class DeviceDB {
 
     public DeviceEntity getDevice(String id) {
         if (null == devices.get(id)) {
-            throw new NoSuchElementException();
+            throw new DeviceNotFoundException("Error! Device: " + id + " is can not be found!");
         }
         return devices.get(id);
     }

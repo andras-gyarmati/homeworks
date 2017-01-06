@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -22,7 +21,7 @@ public class UserDB {
 
     public UserEntity addUser(UserEntity user) {
         if (null != users.get(user.getUsername())) {
-            throw new IllegalArgumentException("Error! Username is taken.");
+            throw new UsernameTakenException("Error! Username is taken.");
         }
         Date currentDate = new Date();
         user.setRegistrationDate(currentDate);
@@ -33,7 +32,7 @@ public class UserDB {
 
     public UserEntity getUser(String username) {
         if (null == users.get(username)) {
-            throw new NoSuchElementException();
+            throw new UserNotFoundException("Error! User: " + username + " is can not be found!");
         }
         return users.get(username);
     }
@@ -45,7 +44,7 @@ public class UserDB {
 
     public UserEntity modifyUser(UserEntity user) {
         if (null == users.get(user.getUsername())) {
-            throw new NoSuchElementException();
+            throw new UserNotFoundException("Error! User: " + user.getUsername() + " is can not be found!");
         }
         Date currentDate = new Date();
         user.setLastModifiedDate(currentDate);

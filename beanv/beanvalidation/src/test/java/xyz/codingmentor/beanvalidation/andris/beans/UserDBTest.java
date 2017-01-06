@@ -58,7 +58,7 @@ public class UserDBTest {
         userDB = new UserDB();
         UserEntity user = initUser();
         userDB.addUser(user);
-        Assert.assertEquals(true, userDB.authenticate(user.getUsername(), user.getPassword()));
+        Assert.assertTrue(userDB.authenticate(user.getUsername(), user.getPassword()));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class UserDBTest {
         userDB.addUser(user);
         String newPhone = "06987654321";
         user.setPhone(newPhone);
-        Assert.assertEquals(true, newPhone.equals(userDB.modifyUser(user).getPhone()));
+        Assert.assertEquals(newPhone, userDB.modifyUser(user).getPhone());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class UserDBTest {
         Assert.assertEquals(0, userDB.getAllUser().size());
     }
     
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = UserNotFoundException.class)
     public void removeUserFromEmpty() {
         userDB = new UserDB();
         userDB.deleteUser(initUser());

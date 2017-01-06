@@ -46,7 +46,7 @@ public class DeviceDBTest {
         Assert.assertEquals(0, deviceDB.getAllDevice().size());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = DeviceNotFoundException.class)
     public void deleteDeviceFromEmptyMap() {
         deviceDB = new DeviceDB();
         DeviceEntity device = new DeviceEntity(null, Manufacturer.ONEPLUS, "Two", 130000, Color.BLACK, 0);
