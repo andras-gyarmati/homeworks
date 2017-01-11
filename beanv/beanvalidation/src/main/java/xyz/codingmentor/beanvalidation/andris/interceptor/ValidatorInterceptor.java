@@ -38,10 +38,9 @@ public class ValidatorInterceptor {
     private void validateBean(Object o) {
         Set<ConstraintViolation<Object>> violations = validator.validate(o);
         Optional<String> errorMessage;
-        errorMessage = violations.stream().map((ConstraintViolation<Object> e) -> e.getMessage() + "Validation error: " + " - property: " + e.getPropertyPath().toString() + " . ").reduce(String::concat);
+        errorMessage = violations.stream().map((ConstraintViolation<Object> e) -> e.getMessage()).reduce(String::concat);
         if (errorMessage.isPresent()) {
             throw new ValidationException(errorMessage.get());
-        } else {
         }
     }
 

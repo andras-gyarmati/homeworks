@@ -17,7 +17,7 @@ import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
  *
  * @author brianelete
  */
-@BeanValidation
+//@BeanValidation
 @Interceptors(ValidatorInterceptor.class)
 public class UserDB {
 

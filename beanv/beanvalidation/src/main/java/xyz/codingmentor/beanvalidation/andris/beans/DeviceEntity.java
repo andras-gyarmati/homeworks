@@ -3,6 +3,7 @@ package xyz.codingmentor.beanvalidation.andris.beans;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import xyz.codingmentor.beanvalidation.andris.annotation.Validate;
 import xyz.codingmentor.beanvalidation.andris.constraint.DeviceColor;
 
 /**
@@ -10,6 +11,7 @@ import xyz.codingmentor.beanvalidation.andris.constraint.DeviceColor;
  * @author brianelete
  */
 @DeviceColor
+@Validate
 public class DeviceEntity {
 
     @NotNull
