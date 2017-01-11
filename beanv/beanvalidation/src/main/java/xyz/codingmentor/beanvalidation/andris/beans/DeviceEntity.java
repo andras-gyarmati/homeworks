@@ -3,7 +3,7 @@ package xyz.codingmentor.beanvalidation.andris.beans;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import xyz.codingmentor.beanvalidation.andris.constraints.DeviceColor;
+import xyz.codingmentor.beanvalidation.andris.constraint.DeviceColor;
 
 /**
  *

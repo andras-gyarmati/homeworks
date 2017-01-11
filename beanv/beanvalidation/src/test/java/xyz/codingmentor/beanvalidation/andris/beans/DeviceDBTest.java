@@ -1,5 +1,6 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.exception.DeviceNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.junit.Assert;

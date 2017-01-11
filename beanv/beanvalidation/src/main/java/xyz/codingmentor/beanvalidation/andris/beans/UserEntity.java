@@ -7,8 +7,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
-import xyz.codingmentor.beanvalidation.andris.constraints.Name;
-import xyz.codingmentor.beanvalidation.andris.constraints.BirthDate;
+import xyz.codingmentor.beanvalidation.andris.constraint.Name;
+import xyz.codingmentor.beanvalidation.andris.constraint.BirthDate;
 
 /**
  *

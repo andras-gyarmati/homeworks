@@ -1,4 +1,4 @@
-package xyz.codingmentor.beanvalidation.andris.constraints;
+package xyz.codingmentor.beanvalidation.andris.constraint;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,12 +11,12 @@ import javax.validation.Payload;
  *
  * @author brianelete
  */
-@Constraint(validatedBy = NameValidator.class)
+@Constraint(validatedBy = BirthDateValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
-public @interface Name {
+public @interface BirthDate {
 
-    String message() default "{Name.message}";
+    String message() default "{BirthDate.message}";
 
     Class<?>[] groups() default {};
 

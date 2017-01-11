@@ -1,4 +1,4 @@
-package xyz.codingmentor.beanvalidation.andris.constraints;
+package xyz.codingmentor.beanvalidation.andris.constraint;
 
 import xyz.codingmentor.beanvalidation.andris.beans.Color;
 import xyz.codingmentor.beanvalidation.andris.beans.DeviceEntity;

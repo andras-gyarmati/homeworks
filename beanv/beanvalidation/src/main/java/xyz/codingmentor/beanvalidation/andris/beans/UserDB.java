@@ -1,16 +1,24 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
+import xyz.codingmentor.beanvalidation.andris.exception.UsernameTakenException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.interceptor.ExcludeClassInterceptors;
+import javax.interceptor.Interceptors;
+import xyz.codingmentor.beanvalidation.andris.interceptor.BeanValidation;
+import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
 
 /**
  *
  * @author brianelete
  */
+@BeanValidation
+@Interceptors(ValidatorInterceptor.class)
 public class UserDB {
 
     private Map<String, UserEntity> users = new HashMap<>();
@@ -19,6 +27,7 @@ public class UserDB {
         // empty
     }
 
+    @ExcludeClassInterceptors
     public UserEntity addUser(UserEntity user) {
         if (null != users.get(user.getUsername())) {
             throw new UsernameTakenException("Error! Username is taken.");

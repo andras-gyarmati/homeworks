@@ -1,4 +1,4 @@
-package xyz.codingmentor.beanvalidation.andris.constraints;
+package xyz.codingmentor.beanvalidation.andris.constraint;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

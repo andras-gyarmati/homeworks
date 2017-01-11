@@ -1,8 +1,8 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Test;
 

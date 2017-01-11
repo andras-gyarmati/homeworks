@@ -1,20 +1,29 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
-/**
- *
- * @author brianelete
- */
+import xyz.codingmentor.beanvalidation.andris.exception.DeviceAlreadyStoredException;
+import xyz.codingmentor.beanvalidation.andris.exception.DeviceNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import javax.interceptor.ExcludeClassInterceptors;
+import javax.interceptor.Interceptors;
+import xyz.codingmentor.beanvalidation.andris.interceptor.BeanValidation;
+import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
 
+/**
+ *
+ * @author brianelete
+ */
+@BeanValidation
+@Interceptors(ValidatorInterceptor.class)
 public class DeviceDB {
 
     private Map<String, DeviceEntity> devices = new HashMap<>();
 
+    @ExcludeClassInterceptors
     public void addDevice(DeviceEntity device) {
         if (null != devices.get(device.getId())) {
             throw new DeviceAlreadyStoredException("Error! Already stored item.");
