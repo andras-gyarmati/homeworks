@@ -1,5 +1,6 @@
 package xyz.codingmentor.beanvalidation.andris.bean;
 
+import java.util.Objects;
 import xyz.codingmentor.beanvalidation.andris.enums.Color;
 import xyz.codingmentor.beanvalidation.andris.enums.Manufacturer;
 import javax.validation.constraints.DecimalMin;
@@ -81,6 +82,31 @@ public class DeviceEntity {
     @Override
     public String toString() {
         return "DeviceEntity{" + "id=" + id + ", manufacturer=" + manufacturer + ", type=" + type + ", price=" + price + ", color=" + color + ", count=" + count + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DeviceEntity other = (DeviceEntity) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
 }

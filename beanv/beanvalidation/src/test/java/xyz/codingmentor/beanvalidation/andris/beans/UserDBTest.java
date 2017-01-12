@@ -2,16 +2,15 @@ package xyz.codingmentor.beanvalidation.andris.beans;
 
 import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
 import xyz.codingmentor.beanvalidation.andris.enums.Sex;
-import xyz.codingmentor.beanvalidation.andris.database.UserDBSingleton;
 import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import xyz.codingmentor.beanvalidation.andris.database.UserDB;
 
 /**
  *
@@ -19,7 +18,7 @@ import org.junit.Test;
  */
 public class UserDBTest {
 
-    private static UserDBSingleton userDB;
+    private static UserDB userDB;
 
     public UserDBTest() {
         // empty
@@ -27,7 +26,7 @@ public class UserDBTest {
 
     @BeforeClass
     public static void init() {
-        userDB = UserDBSingleton.INSTANCE;
+        userDB = new UserDB();
     }
 
     @Before

@@ -3,14 +3,13 @@ package xyz.codingmentor.beanvalidation.andris.beans;
 import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
 import xyz.codingmentor.beanvalidation.andris.enums.Manufacturer;
 import xyz.codingmentor.beanvalidation.andris.enums.Color;
-import xyz.codingmentor.beanvalidation.andris.database.DeviceDBSingleton;
 import xyz.codingmentor.beanvalidation.andris.exception.DeviceNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import xyz.codingmentor.beanvalidation.andris.database.DeviceDB;
 
 /**
  *
@@ -18,7 +17,7 @@ import org.junit.Test;
  */
 public class DeviceDBTest {
 
-    private static DeviceDBSingleton deviceDB;
+    private static DeviceDB deviceDB;
 
     public DeviceDBTest() {
         // empty
@@ -26,7 +25,7 @@ public class DeviceDBTest {
 
     @BeforeClass
     public static void init() {
-        deviceDB = DeviceDBSingleton.INSTANCE;
+        deviceDB = new DeviceDB();
     }
 
     @Before
@@ -79,5 +78,4 @@ public class DeviceDBTest {
         List<DeviceEntity> allDevice = deviceDB.getAllDevice();
         Assert.assertEquals(2, allDevice.size());
     }
-
 }

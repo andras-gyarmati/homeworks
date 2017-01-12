@@ -1,6 +1,5 @@
 package xyz.codingmentor.beanvalidation.andris.service;
 
-import xyz.codingmentor.beanvalidation.andris.database.DeviceDBSingleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +7,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
-import xyz.codingmentor.beanvalidation.andris.exception.AmountInCartIsLessThanRemovableAmountException;
+import xyz.codingmentor.beanvalidation.andris.database.DeviceDB;
+import xyz.codingmentor.beanvalidation.andris.exception.WrongAmountException;
 
 /**
  *
@@ -18,11 +18,15 @@ public class Cart {
 
     private static final Logger LOGGER = Logger.getLogger(Cart.class.getName());
 
-    DeviceDBSingleton deviceDB = DeviceDBSingleton.INSTANCE;
+    private final DeviceDB deviceDB;
 
     private int price;
 
     Map<String, DeviceEntity> devices = new HashMap<>();
+
+    public Cart() {
+        this.deviceDB = new DeviceDB();
+    }
 
     public void addDevice(DeviceEntity device, int count) {
         if (count <= deviceDB.getDevice(device.getId()).getCount()) {
@@ -32,12 +36,14 @@ public class Cart {
             devices.put(addedDevice.getId(), addedDevice);
             price += addedDevice.getPrice() * count;
             LOGGER.log(Level.INFO, "{0} added, count: {1} price: {2}", new Object[]{addedDevice.toString(), addedDevice.getCount(), addedDevice.getCount() * addedDevice.getPrice()});
+        } else {
+            throw new WrongAmountException("The amount of devices in the database is less than you want to add!");
         }
     }
 
     public void removeDevice(DeviceEntity device, int count) {
         if (count > devices.get(device.getId()).getCount()) {
-            throw new AmountInCartIsLessThanRemovableAmountException("The amount of devices in the cart is less than you want to remove!");
+            throw new WrongAmountException("The amount of devices in the cart is less than you want to remove!");
         } else if (count == devices.get(device.getId()).getCount()) {
             devices.remove(device.getId());
         } else if (count < devices.get(device.getId()).getCount()) {

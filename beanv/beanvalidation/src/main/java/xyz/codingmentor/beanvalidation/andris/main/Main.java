@@ -7,7 +7,6 @@ import java.io.IOException;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xyz.codingmentor.beanvalidation.andris.service.Cart;
@@ -30,7 +29,7 @@ public class Main {
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     private Main() {
-        //sonar
+        //empty
     }
 
     public static void main(String[] args) throws IOException {
@@ -49,10 +48,11 @@ public class Main {
             cart.addDevice(deviceToBuy, 2);
             LOGGER.log(Level.INFO, "Total pice: " + cart.getPrice());
             cart.buy();
+            cart.addDevice(deviceToBuy, 22);
         } catch (IOException e) {
-            LOGGER.info((Supplier<String>) e);
+            LOGGER.log(Level.SEVERE, null, e);
         } catch (Exception e) {
-            LOGGER.log(Level.INFO, "{0} i dont understand why this is a sonar error :sadface:", e.getMessage());
+            LOGGER.log(Level.SEVERE, null, e);
         }
         weld.shutdown();
     }
