@@ -1,29 +1,24 @@
-package xyz.codingmentor.beanvalidation.andris.beans;
+package xyz.codingmentor.beanvalidation.andris.database;
 
-import xyz.codingmentor.beanvalidation.andris.exception.DeviceAlreadyStoredException;
 import xyz.codingmentor.beanvalidation.andris.exception.DeviceNotFoundException;
+import xyz.codingmentor.beanvalidation.andris.exception.DeviceAlreadyStoredException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
-import javax.interceptor.ExcludeClassInterceptors;
-import javax.interceptor.Interceptors;
-import xyz.codingmentor.beanvalidation.andris.interceptor.BeanValidation;
-import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
+import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
 
 /**
  *
  * @author brianelete
  */
-//@BeanValidation
-@Interceptors(ValidatorInterceptor.class)
-public class DeviceDB {
+public enum DeviceDBSingleton {
+    
+    INSTANCE;
 
-    private Map<String, DeviceEntity> devices = new HashMap<>();
+    private final Map<String, DeviceEntity> devices = new HashMap<>();
 
-    @ExcludeClassInterceptors
     public void addDevice(DeviceEntity device) {
         if (null != devices.get(device.getId())) {
             throw new DeviceAlreadyStoredException("Error! Already stored item.");
@@ -55,34 +50,6 @@ public class DeviceDB {
     }
 
     public List<DeviceEntity> getAllDevice() {
-        List<DeviceEntity> deviceList = new ArrayList();
-        deviceList.addAll(devices.values());
-        return deviceList;
+        return new ArrayList(devices.values());
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.devices);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final DeviceDB other = (DeviceDB) obj;
-        if (!Objects.equals(this.devices, other.devices)) {
-            return false;
-        }
-        return true;
-    }
-
 }

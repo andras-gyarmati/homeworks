@@ -1,5 +1,7 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
+import xyz.codingmentor.beanvalidation.andris.enums.Sex;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;

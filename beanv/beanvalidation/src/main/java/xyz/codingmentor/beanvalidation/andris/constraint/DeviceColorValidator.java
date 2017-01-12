@@ -1,8 +1,8 @@
 package xyz.codingmentor.beanvalidation.andris.constraint;
 
-import xyz.codingmentor.beanvalidation.andris.beans.Color;
-import xyz.codingmentor.beanvalidation.andris.beans.DeviceEntity;
-import xyz.codingmentor.beanvalidation.andris.beans.Manufacturer;
+import xyz.codingmentor.beanvalidation.andris.enums.Color;
+import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
+import xyz.codingmentor.beanvalidation.andris.enums.Manufacturer;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

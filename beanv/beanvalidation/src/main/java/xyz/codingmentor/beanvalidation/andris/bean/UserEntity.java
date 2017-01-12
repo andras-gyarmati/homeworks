@@ -1,5 +1,6 @@
-package xyz.codingmentor.beanvalidation.andris.beans;
+package xyz.codingmentor.beanvalidation.andris.bean;
 
+import xyz.codingmentor.beanvalidation.andris.enums.Sex;
 import java.util.Date;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
@@ -223,7 +224,7 @@ public class UserEntity {
         return true;
     }
 
-    static class Builder {
+    public static class Builder {
 
         private String username;
         private String password;

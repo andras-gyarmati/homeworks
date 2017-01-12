@@ -9,11 +9,11 @@ import org.jboss.weld.environment.se.WeldContainer;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import xyz.codingmentor.beanvalidation.andris.beans.Cart;
-import xyz.codingmentor.beanvalidation.andris.beans.DeviceDB;
-import xyz.codingmentor.beanvalidation.andris.beans.DeviceEntity;
-import xyz.codingmentor.beanvalidation.andris.beans.UserDB;
-import xyz.codingmentor.beanvalidation.andris.beans.UserEntity;
+import xyz.codingmentor.beanvalidation.andris.service.Cart;
+import xyz.codingmentor.beanvalidation.andris.database.DeviceDB;
+import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
+import xyz.codingmentor.beanvalidation.andris.database.UserDB;
+import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
 
 /**
  *
@@ -28,6 +28,7 @@ public class Main {
     private static WeldContainer container;
     private static UserDB userDB;
     private static DeviceDB deviceDB;
+    private static Cart cart;
 
     public static void main(String[] args) throws IOException {
         weld = new Weld();
@@ -36,11 +37,18 @@ public class Main {
         try {
             readUsersFromJson("json/users.json");
             readDevicesFromJson("json/devices.json");
-            readUsersFromJson("json/invalidUsers.json");
-            readDevicesFromJson("json/invalidDevices.json");
-            Cart cart = container.instance().select(Cart.class).get();
+//            readUsersFromJson("json/invalidUsers.json");
+//            readDevicesFromJson("json/invalidDevices.json");
+            cart = container.instance().select(Cart.class).get();
             List<DeviceEntity> devices = deviceDB.getAllDevice();
-            cart.addDevice(devices.get(0), 1);
+            DeviceEntity deviceToBuy = devices.get(0);
+            deviceToBuy.setCount(10);
+            cart.addDevice(deviceToBuy, 3);
+            cart.removeDevice(deviceToBuy, 1);
+            cart.removeAll();
+            cart.addDevice(deviceToBuy, 2);
+            LOGGER.log(Level.INFO, "Total pice: " + cart.getPrice());
+            cart.buy();
         } catch (Exception e) {
             LOGGER.log(Level.INFO, e.getMessage());
         }

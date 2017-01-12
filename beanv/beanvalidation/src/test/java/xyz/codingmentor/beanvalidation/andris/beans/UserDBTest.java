@@ -1,9 +1,16 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
+import xyz.codingmentor.beanvalidation.andris.enums.Sex;
+import xyz.codingmentor.beanvalidation.andris.database.UserDBSingleton;
 import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -12,10 +19,23 @@ import org.junit.Test;
  */
 public class UserDBTest {
 
-    private UserDB userDB;
+    private static UserDBSingleton userDB;
 
     public UserDBTest() {
         // empty
+    }
+
+    @BeforeClass
+    public static void init() {
+        userDB = UserDBSingleton.INSTANCE;
+    }
+
+    @Before
+    public void initDB() {
+        List<UserEntity> users = userDB.getAllUser();
+        for (UserEntity user : users) {
+            userDB.deleteUser(user);
+        }
     }
 
     public UserEntity initUser() {
@@ -39,7 +59,6 @@ public class UserDBTest {
 
     @Test
     public void addUser() {
-        userDB = new UserDB();
         Assert.assertEquals(0, userDB.getAllUser().size());
         userDB.addUser(initUser());
         Assert.assertEquals(1, userDB.getAllUser().size());
@@ -47,7 +66,6 @@ public class UserDBTest {
 
     @Test
     public void getUser() {
-        userDB = new UserDB();
         UserEntity user = initUser();
         userDB.addUser(user);
         Assert.assertEquals(user, userDB.getUser(user.getUsername()));
@@ -55,7 +73,6 @@ public class UserDBTest {
 
     @Test
     public void authenticate() {
-        userDB = new UserDB();
         UserEntity user = initUser();
         userDB.addUser(user);
         Assert.assertTrue(userDB.authenticate(user.getUsername(), user.getPassword()));
@@ -63,7 +80,6 @@ public class UserDBTest {
 
     @Test
     public void modifyUser() {
-        userDB = new UserDB();
         UserEntity user = initUser();
         userDB.addUser(user);
         String newPhone = "06987654321";
@@ -73,26 +89,23 @@ public class UserDBTest {
 
     @Test
     public void removeUser() {
-        userDB = new UserDB();
         UserEntity user = initUser();
         userDB.addUser(user);
         userDB.deleteUser(user);
         Assert.assertEquals(0, userDB.getAllUser().size());
     }
-    
+
     @Test(expected = UserNotFoundException.class)
     public void removeUserFromEmpty() {
-        userDB = new UserDB();
         userDB.deleteUser(initUser());
     }
 
     @Test
     public void getAllUser() {
-        userDB = new UserDB();
-        UserEntity user = initUser();
-        userDB.addUser(user);
-        user.setUsername("johndoe");
-        userDB.addUser(user);
+        userDB.addUser(initUser());
+        UserEntity user2 = initUser();
+        user2.setUsername("johndoe");
+        userDB.addUser(user2);
         Assert.assertEquals(2, userDB.getAllUser().size());
     }
 

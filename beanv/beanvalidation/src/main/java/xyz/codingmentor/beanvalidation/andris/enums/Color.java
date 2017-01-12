@@ -1,4 +1,4 @@
-package xyz.codingmentor.beanvalidation.andris.beans;
+package xyz.codingmentor.beanvalidation.andris.enums;
 
 /**
  *

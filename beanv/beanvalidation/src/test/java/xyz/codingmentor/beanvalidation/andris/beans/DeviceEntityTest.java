@@ -1,5 +1,8 @@
 package xyz.codingmentor.beanvalidation.andris.beans;
 
+import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
+import xyz.codingmentor.beanvalidation.andris.enums.Manufacturer;
+import xyz.codingmentor.beanvalidation.andris.enums.Color;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

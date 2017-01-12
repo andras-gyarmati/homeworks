@@ -1,33 +1,24 @@
-package xyz.codingmentor.beanvalidation.andris.beans;
+package xyz.codingmentor.beanvalidation.andris.database;
 
-import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import xyz.codingmentor.beanvalidation.andris.exception.UsernameTakenException;
+import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import javax.interceptor.ExcludeClassInterceptors;
-import javax.interceptor.Interceptors;
-import xyz.codingmentor.beanvalidation.andris.interceptor.BeanValidation;
-import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
+import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
 
 /**
  *
  * @author brianelete
  */
-//@BeanValidation
-@Interceptors(ValidatorInterceptor.class)
-public class UserDB {
+public enum UserDBSingleton {
 
-    private Map<String, UserEntity> users = new HashMap<>();
+    INSTANCE;
 
-    public UserDB() {
-        // empty
-    }
+    private final Map<String, UserEntity> users = new HashMap<>();
 
-    @ExcludeClassInterceptors
     public UserEntity addUser(UserEntity user) {
         if (null != users.get(user.getUsername())) {
             throw new UsernameTakenException("Error! Username is taken.");
@@ -68,33 +59,6 @@ public class UserDB {
     }
 
     public List<UserEntity> getAllUser() {
-        List<UserEntity> userList = new ArrayList();
-        userList.addAll(users.values());
-        return userList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.users);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UserDB other = (UserDB) obj;
-        if (!Objects.equals(this.users, other.users)) {
-            return false;
-        }
-        return true;
+        return new ArrayList(users.values());
     }
 }

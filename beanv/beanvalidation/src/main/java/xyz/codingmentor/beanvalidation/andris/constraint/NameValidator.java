@@ -1,6 +1,6 @@
 package xyz.codingmentor.beanvalidation.andris.constraint;
 
-import xyz.codingmentor.beanvalidation.andris.beans.UserEntity;
+import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

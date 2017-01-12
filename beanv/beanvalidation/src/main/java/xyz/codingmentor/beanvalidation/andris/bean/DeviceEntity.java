@@ -1,5 +1,7 @@
-package xyz.codingmentor.beanvalidation.andris.beans;
+package xyz.codingmentor.beanvalidation.andris.bean;
 
+import xyz.codingmentor.beanvalidation.andris.enums.Color;
+import xyz.codingmentor.beanvalidation.andris.enums.Manufacturer;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -74,6 +76,11 @@ public class DeviceEntity {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceEntity{" + "id=" + id + ", manufacturer=" + manufacturer + ", type=" + type + ", price=" + price + ", color=" + color + ", count=" + count + '}';
     }
     
 }
