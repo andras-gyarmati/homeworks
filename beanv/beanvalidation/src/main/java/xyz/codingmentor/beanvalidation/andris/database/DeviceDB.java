@@ -13,29 +13,33 @@ import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
 @Interceptors(ValidatorInterceptor.class)
 public class DeviceDB {
 
-    private DeviceDBSingleton deviceDB = DeviceDBSingleton.INSTANCE;
+    private final DeviceDBSingleton deviceDBSingleton;
+
+    public DeviceDB() {
+        this.deviceDBSingleton = DeviceDBSingleton.INSTANCE;
+    }
 
     @ExcludeClassInterceptors
     public void addDevice(DeviceEntity device) {
-        deviceDB.addDevice(device);
+        deviceDBSingleton.addDevice(device);
     }
 
     public DeviceEntity editDevice(DeviceEntity device) {
-        DeviceEntity editedDevice = deviceDB.editDevice(device);
-        return editedDevice;
+        return deviceDBSingleton.editDevice(device);
+
     }
 
     public DeviceEntity getDevice(String id) {
-        return deviceDB.getDevice(id);
+        return deviceDBSingleton.getDevice(id);
     }
 
     public DeviceEntity deleteDevice(DeviceEntity device) {
-        DeviceEntity deletedDevice = deviceDB.deleteDevice(device);
-        return deletedDevice;
+        return deviceDBSingleton.deleteDevice(device);
+
     }
 
     public List<DeviceEntity> getAllDevice() {
-        return deviceDB.getAllDevice();
+        return deviceDBSingleton.getAllDevice();
     }
 
 }

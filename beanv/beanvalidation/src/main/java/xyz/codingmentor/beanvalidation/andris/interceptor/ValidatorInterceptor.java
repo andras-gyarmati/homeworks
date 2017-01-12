@@ -32,7 +32,10 @@ public class ValidatorInterceptor {
     }
 
     private void validateParameters(Object[] parameters) {
-        Arrays.asList(parameters).stream().filter(p -> p.getClass().isAnnotationPresent(Validate.class)).forEach(p -> validateBean(p));
+        Arrays.asList(parameters)
+                .stream()
+                .filter(p -> p.getClass().isAnnotationPresent(Validate.class))
+                .forEach(p -> validateBean(p));
     }
 
     private void validateBean(Object o) {

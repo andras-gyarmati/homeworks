@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xyz.codingmentor.beanvalidation.andris.service.Cart;
@@ -21,24 +22,23 @@ import xyz.codingmentor.beanvalidation.andris.bean.UserEntity;
  */
 public class Main {
 
-    private Main() {
-        //empty
-    }
     private static Weld weld;
     private static WeldContainer container;
     private static UserDB userDB;
     private static DeviceDB deviceDB;
     private static Cart cart;
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+
+    private Main() {
+        //sonar
+    }
 
     public static void main(String[] args) throws IOException {
         weld = new Weld();
         container = weld.initialize();
-        Logger LOGGER = Logger.getLogger(Main.class.getName());
         try {
             readUsersFromJson("json/users.json");
             readDevicesFromJson("json/devices.json");
-//            readUsersFromJson("json/invalidUsers.json");
-//            readDevicesFromJson("json/invalidDevices.json");
             cart = container.instance().select(Cart.class).get();
             List<DeviceEntity> devices = deviceDB.getAllDevice();
             DeviceEntity deviceToBuy = devices.get(0);
@@ -49,8 +49,10 @@ public class Main {
             cart.addDevice(deviceToBuy, 2);
             LOGGER.log(Level.INFO, "Total pice: " + cart.getPrice());
             cart.buy();
+        } catch (IOException e) {
+            LOGGER.info((Supplier<String>) e);
         } catch (Exception e) {
-            LOGGER.log(Level.INFO, e.getMessage());
+            LOGGER.log(Level.INFO, "{0} i dont understand why this is a sonar error :sadface:", e.getMessage());
         }
         weld.shutdown();
     }

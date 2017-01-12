@@ -1,5 +1,6 @@
 package xyz.codingmentor.beanvalidation.andris.database;
 
+import java.io.IOException;
 import xyz.codingmentor.beanvalidation.andris.exception.DeviceNotFoundException;
 import xyz.codingmentor.beanvalidation.andris.exception.DeviceAlreadyStoredException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import xyz.codingmentor.beanvalidation.andris.bean.DeviceEntity;
  * @author brianelete
  */
 public enum DeviceDBSingleton {
-    
+
     INSTANCE;
 
     private final Map<String, DeviceEntity> devices = new HashMap<>();
@@ -51,5 +52,13 @@ public enum DeviceDBSingleton {
 
     public List<DeviceEntity> getAllDevice() {
         return new ArrayList(devices.values());
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        //sonar
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        //sonar
     }
 }

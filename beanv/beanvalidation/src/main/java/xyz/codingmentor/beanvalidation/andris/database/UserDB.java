@@ -12,34 +12,35 @@ import xyz.codingmentor.beanvalidation.andris.interceptor.ValidatorInterceptor;
  */
 @Interceptors(ValidatorInterceptor.class)
 public class UserDB {
- 
-    private UserDBSingleton userDB = UserDBSingleton.INSTANCE.INSTANCE;
- 
+
+    private final UserDBSingleton userDBSingleton;
+
+    public UserDB() {
+        this.userDBSingleton = UserDBSingleton.INSTANCE;
+    }
+
     @ExcludeClassInterceptors
     public UserEntity addUser(UserEntity user) {
-        UserEntity addedUser = userDB.addUser(user);
-        return addedUser;
+        return userDBSingleton.addUser(user);
     }
- 
+
     public UserEntity getUser(String username) {
-        return userDB.getUser(username);
+        return userDBSingleton.getUser(username);
     }
- 
+
     public boolean authenticate(String username, String password) {
-        return userDB.authenticate(username, password);
+        return userDBSingleton.authenticate(username, password);
     }
- 
+
     public UserEntity modifyUser(UserEntity user) {
-        UserEntity modifiedUser = userDB.modifyUser(user);
-        return modifiedUser;
+        return userDBSingleton.modifyUser(user);
     }
- 
+
     public UserEntity deleteUser(UserEntity user) {
-        UserEntity deletedUser = userDB.deleteUser(user);
-        return deletedUser;
+        return userDBSingleton.deleteUser(user);
     }
- 
+
     public List<UserEntity> getAllUser() {
-        return userDB.getAllUser();
+        return userDBSingleton.getAllUser();
     }
 }

@@ -1,5 +1,6 @@
 package xyz.codingmentor.beanvalidation.andris.database;
 
+import java.io.IOException;
 import xyz.codingmentor.beanvalidation.andris.exception.UsernameTakenException;
 import xyz.codingmentor.beanvalidation.andris.exception.UserNotFoundException;
 import java.util.ArrayList;
@@ -60,5 +61,13 @@ public enum UserDBSingleton {
 
     public List<UserEntity> getAllUser() {
         return new ArrayList(users.values());
+    }
+    
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        //sonar
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        //sonar
     }
 }
