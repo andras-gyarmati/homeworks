@@ -26,11 +26,20 @@ public class UserRESTService {
 
     private static final Map<String, UserEntity> USERS = new HashMap<>();
     
+    /**
+     * http://localhost:8080/andris.08rest-web/rest/users
+     * @return
+     */
     @GET
     public Collection<UserEntity> getUsers() {
         return USERS.values();
     }
 
+    /**
+     * http://localhost:8080/andris.08rest-web/rest/users
+     * @param user
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public UserEntity addUser(UserEntity user) {
@@ -39,12 +48,23 @@ public class UserRESTService {
         return user;
     }
 
+    /**
+     * http://localhost:8080/andris.08rest-web/rest/users/{id}
+     * @param id
+     * @return
+     */
     @GET
     @Path("/{id}")
     public UserEntity getUserById(@PathParam("id") String id) {
         return USERS.get(id);
     }
 
+    /**
+     * http://localhost:8080/andris.08rest-web/rest/users/{id}
+     * @param id
+     * @param user
+     * @return
+     */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -56,6 +76,11 @@ public class UserRESTService {
         return user;
     }
 
+    /**
+     * http://localhost:8080/andris.08rest-web/rest/users/{id}
+     * @param id
+     * @return
+     */
     @DELETE
     @Path("/{id}")
     public UserEntity deleteUser(@PathParam("id") String id) {
