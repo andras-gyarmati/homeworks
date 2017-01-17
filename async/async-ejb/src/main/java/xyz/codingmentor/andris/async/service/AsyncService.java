@@ -18,7 +18,7 @@ import javax.ejb.Stateless;
 public class AsyncService {
 
     @Resource
-    SessionContext ctx;
+    private SessionContext ctx;
 
     private static final Logger LOGGER = Logger.getLogger(AsyncService.class.getName());
 
