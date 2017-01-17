@@ -29,12 +29,19 @@ public class AsyncRESTService {
      */
     @GET
     @Path("/future/{id}")
-    public String getAsyncFuture(@PathParam("id") String id) throws InterruptedException, ExecutionException {
+    public String getAsyncFuture(@PathParam("id") String id) {
         Future<Integer> status = asyncService.doStuffFuture();
         LOGGER.log(Level.INFO, "GET VALUE");
-        Integer statusValue = status.get();
+        Integer statusValue = -1;
+        try {
+            statusValue = status.get();
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+        } catch (ExecutionException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+        }
         LOGGER.log(Level.INFO, "RETURN FUTURE");
-        return id + " finished, statusValue: " + statusValue;
+        return id + " future finished, statusValue: " + statusValue;
     }
 
     /**
@@ -42,9 +49,9 @@ public class AsyncRESTService {
      */
     @GET
     @Path("/void/{id}")
-    public String getAsyncVoid(@PathParam("id") String id) throws InterruptedException {
+    public String getAsyncVoid(@PathParam("id") String id) {
         asyncService.doStuffVoid();
         LOGGER.log(Level.INFO, "RETURN VOID");
-        return id + " finished.";
+        return id + " void finished.";
     }
 }
