@@ -1,0 +1,80 @@
+package xyz.codingmentor.andris.webshop.rest;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
+import xyz.codingmentor.andris.webshop.exception.NotLoggedInException;
+import xyz.codingmentor.andris.webshop.service.Cart;
+
+/**
+ *
+ * @author beianelete
+ */
+@Path("/cart")
+@Produces(MediaType.APPLICATION_JSON)
+@SessionScoped
+public class CartRESTService implements Serializable {
+
+    @EJB
+    private Cart cart;
+
+    /**
+     * http://localhost:8080/andriswebshop-web/shop/cart
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<DeviceEntity> addToCart(@Context HttpServletRequest request, DeviceEntity device) {
+        checkCredentials(request);
+        return cart.addDevice(device, device.getCount());
+    }
+    
+    /**
+     * http://localhost:8080/andriswebshop-web/shop/cart/delete
+     */
+    @POST
+    @Path("/delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public DeviceEntity deleteFromCart(@Context HttpServletRequest request, DeviceEntity device) {
+        checkCredentials(request);
+        return cart.removeDevice(device, device.getCount());
+    }
+
+    /**
+     * http://localhost:8080/andriswebshop-web/shop/cart
+     */
+    @GET
+    public List<DeviceEntity> getCart(@Context HttpServletRequest request) {
+        checkCredentials(request);
+        return cart.getAllDevices();
+    }
+
+    /**
+     * http://localhost:8080/andriswebshop-web/shop/cart/buyCart
+     */
+    @POST
+    @Path("/buyCart")
+    public List<DeviceEntity> buyCart(@Context HttpServletRequest request) {
+        checkCredentials(request);
+        List<DeviceEntity> devicesToBuy = cart.buyCart();
+        request.getSession().invalidate();
+        return devicesToBuy;
+    }
+
+    private void checkCredentials(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute(UserRESTService.USER_KEY) == null) {
+            throw new NotLoggedInException("You should log in first!");
+        }
+    }
+}

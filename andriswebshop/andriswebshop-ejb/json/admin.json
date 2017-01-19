@@ -1,0 +1,14 @@
+{
+	"username": "admin",
+	"password": "Pa++w0rd",
+	"firstname": "Pisti",
+	"lastname": "Elete",
+	"address": "1111Budapest",
+	"phone": "06123456789",
+	"email": "someone@example.com",
+	"sex": "MALE",
+	"registrationDate": 1234567891011,
+	"lastModifiedDate": 1234567891011,
+	"dateOfBirth": 1111111111111,
+	"admin": true
+}
