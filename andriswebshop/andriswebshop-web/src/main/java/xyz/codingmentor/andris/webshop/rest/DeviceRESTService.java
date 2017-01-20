@@ -60,16 +60,16 @@ public class DeviceRESTService implements Serializable {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public DeviceEntity getDevice(@PathParam("id") String id) {
         return deviceDB.getDevice(id);
     }
 
     @GET
-    @Path("/all/{id}")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<DeviceEntity> getAllDevice(@PathParam("id") String id) {
+    public List<DeviceEntity> getAllDevice() {
         return deviceDB.getAllDevice();
     }
 

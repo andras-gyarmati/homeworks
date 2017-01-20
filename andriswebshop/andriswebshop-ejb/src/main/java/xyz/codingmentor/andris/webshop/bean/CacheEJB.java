@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.inject.Inject;
 import xyz.codingmentor.andris.webshop.database.DeviceDB;
 import xyz.codingmentor.andris.webshop.database.UserDB;
 
@@ -22,18 +22,18 @@ import xyz.codingmentor.andris.webshop.database.UserDB;
 @Startup
 public class CacheEJB {
 
-    @Inject
+    @EJB
     private UserDB userDB;
-    @Inject
+    @EJB
     private DeviceDB deviceDB;
-    
-     private static final Logger LOGGER = Logger.getLogger(CacheEJB.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(CacheEJB.class.getName());
 
     @PostConstruct
     void init() {
         try {
-            readUsersFromJson("json/users.json");
-            readDevicesFromJson("json/devices.json");
+            readUsersFromJson("users.json");
+            readDevicesFromJson("devices.json");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, null, e);
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class CacheEJB {
 
     private void readUsersFromJson(String filename) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<UserEntity> users = mapper.readValue(new File(filename), new TypeReference<List<UserEntity>>() {
+        List<UserEntity> users = mapper.readValue(new File(getClass().getClassLoader().getResource(filename).getFile()), new TypeReference<List<UserEntity>>() {
         });
         for (UserEntity user : users) {
             userDB.addUser(user);
@@ -52,7 +52,7 @@ public class CacheEJB {
 
     private void readDevicesFromJson(String filename) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<DeviceEntity> devices = mapper.readValue(new File(filename), new TypeReference<List<DeviceEntity>>() {
+        List<DeviceEntity> devices = mapper.readValue(new File(getClass().getClassLoader().getResource(filename).getFile()), new TypeReference<List<DeviceEntity>>() {
         });
         for (DeviceEntity device : devices) {
             deviceDB.addDevice(device);

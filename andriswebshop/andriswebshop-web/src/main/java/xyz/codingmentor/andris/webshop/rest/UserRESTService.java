@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.DependsOn;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.HttpServletRequest;
@@ -91,16 +92,16 @@ public class UserRESTService implements Serializable {
     }
     
     @GET
-    @Path("/{id}")
+    @Path("/get/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public UserEntity getUser(@PathParam("id") String id) {
-        return userDB.getUser(id);
+    public UserEntity getUser(@PathParam("username") String username) {
+        return userDB.getUser(username);
     }
     
     @GET
-    @Path("/all/{id}")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserEntity> getAllUser(@PathParam("id") String id) {
+    public List<UserEntity> getAllUser() {
         return userDB.getAllUser();
     }
     

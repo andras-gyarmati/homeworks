@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.inject.Inject;
 import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
 import xyz.codingmentor.andris.webshop.database.DeviceDB;
 import xyz.codingmentor.andris.webshop.exceptions.WrongAmountException;
@@ -20,15 +21,17 @@ import xyz.codingmentor.andris.webshop.exceptions.WrongAmountException;
 public class Cart {
 
     private static final Logger LOGGER = Logger.getLogger(Cart.class.getName());
-
-    private final DeviceDB deviceDB;
-
+    private final Map<String, DeviceEntity> devices = new HashMap<>();
+    private DeviceDB deviceDB;
     private int totalPrice;
 
-    Map<String, DeviceEntity> devices = new HashMap<>();
-
     public Cart() {
-        this.deviceDB = DeviceDB.getInstance();
+        //empty
+    }
+
+    @Inject
+    public Cart(DeviceDB deviceDB) {
+        this.deviceDB = deviceDB;
     }
 
     public List<DeviceEntity> addDevice(DeviceEntity device, int count) {

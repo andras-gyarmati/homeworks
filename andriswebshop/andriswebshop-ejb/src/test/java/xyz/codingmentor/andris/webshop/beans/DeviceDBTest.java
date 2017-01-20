@@ -25,7 +25,7 @@ public class DeviceDBTest {
 
     @BeforeClass
     public static void init() {
-        deviceDB = DeviceDB.getInstance();
+        deviceDB = new DeviceDB();
     }
 
     @Before

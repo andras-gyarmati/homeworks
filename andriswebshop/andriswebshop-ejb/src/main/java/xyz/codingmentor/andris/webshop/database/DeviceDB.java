@@ -22,19 +22,7 @@ import xyz.codingmentor.andris.webshop.interceptor.ValidatorInterceptor;
 public class DeviceDB {
 
     private static final Map<String, DeviceEntity> DEVICES = new HashMap<>();
-    public static DeviceDB INSTANCE;
-
-    public static DeviceDB getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = new DeviceDB();
-        }
-        return INSTANCE;
-    }
-
-    public DeviceDB() {
-        //empty
-    }
-
+    
     @ExcludeClassInterceptors
     public void addDevice(DeviceEntity device) {
         if (null != DEVICES.get(device.getId())) {
