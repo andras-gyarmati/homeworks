@@ -40,8 +40,8 @@ public class DeviceRESTService implements Serializable {
     public ResultDTO addDevice(@Context HttpServletRequest request, DeviceEntity newDevice) {
         HttpSession session = request.getSession();
         if (isLoggedIn(session).isAdmin()) {
-            deviceDB.addDevice(newDevice);
-            return new ResultDTO(ResultType.SUCCESS, newDevice);
+            DeviceEntity returnedDevice = deviceDB.addDevice(newDevice);
+            return new ResultDTO(ResultType.SUCCESS, returnedDevice);
         }
         return new ResultDTO(ResultType.ERROR, newDevice);
     }

@@ -3,6 +3,7 @@ package xyz.codingmentor.andris.webshop.database;
 import xyz.codingmentor.andris.webshop.exceptions.UserNotFoundException;
 import xyz.codingmentor.andris.webshop.exceptions.UsernameTakenException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -84,8 +85,6 @@ public class UserDB {
     }
 
     public List<UserEntity> getAllUser() {
-        List<UserEntity> userList = new ArrayList();
-        userList.addAll(USERS.values());
-        return userList;
+        return new ArrayList(USERS.values());
     }
 }

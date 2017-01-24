@@ -24,13 +24,14 @@ public class DeviceDB {
     private static final Map<String, DeviceEntity> DEVICES = new HashMap<>();
     
     @ExcludeClassInterceptors
-    public void addDevice(DeviceEntity device) {
+    public DeviceEntity addDevice(DeviceEntity device) {
         if (null != DEVICES.get(device.getId())) {
             throw new DeviceAlreadyStoredException("Error! Already stored item.");
         }
         device.setId(UUID.randomUUID().toString());
         device.setCount(0);
         DEVICES.put(device.getId(), device);
+        return DEVICES.get(device.getId());
     }
 
     public DeviceEntity editDevice(DeviceEntity device) {

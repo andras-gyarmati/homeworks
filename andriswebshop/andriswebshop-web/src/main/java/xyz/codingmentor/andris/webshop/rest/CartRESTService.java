@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
+import xyz.codingmentor.andris.webshop.dto.ResultDTO;
+import xyz.codingmentor.andris.webshop.dto.ResultType;
 import xyz.codingmentor.andris.webshop.exception.NotLoggedInException;
 import xyz.codingmentor.andris.webshop.service.Cart;
 
@@ -34,9 +36,9 @@ public class CartRESTService implements Serializable {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<DeviceEntity> addToCart(@Context HttpServletRequest request, DeviceEntity device) {
+    public ResultDTO addToCart(@Context HttpServletRequest request, DeviceEntity device) {
         checkCredentials(request);
-        return cart.addDevice(device, device.getCount());
+        return new ResultDTO(ResultType.SUCCESS, cart.addDevice(device, device.getCount()));
     }
     
     /**

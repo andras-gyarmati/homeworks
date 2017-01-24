@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.DependsOn;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.HttpServletRequest;
@@ -72,8 +71,8 @@ public class UserRESTService implements Serializable {
     public ResultDTO addUser(@Context HttpServletRequest request, UserEntity newUser) {
         HttpSession session = request.getSession();
         if (isLoggedIn(session).isAdmin()) {
-            userDB.addUser(newUser);
-            return new ResultDTO(ResultType.SUCCESS, newUser);
+            UserEntity returnedUser = userDB.addUser(newUser);
+            return new ResultDTO(ResultType.SUCCESS, returnedUser);
         }
         return new ResultDTO(ResultType.ERROR, newUser);
     }

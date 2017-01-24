@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
 import xyz.codingmentor.andris.webshop.database.DeviceDB;
@@ -18,6 +19,7 @@ import xyz.codingmentor.andris.webshop.exceptions.WrongAmountException;
  * @author brianelete
  */
 @Stateful
+@SessionScoped
 public class Cart {
 
     private static final Logger LOGGER = Logger.getLogger(Cart.class.getName());
@@ -75,7 +77,7 @@ public class Cart {
     }
 
     public List<DeviceEntity> getAllDevices() {
-        return new ArrayList(this.devices.values());
+        return new ArrayList<>(devices.values());
     }
 
     @Remove
@@ -88,7 +90,7 @@ public class Cart {
                 if (0 != device.getCount()) {
                     LOGGER.log(Level.INFO, "Purchased: {0} count: {1} price: {2}", new Object[]{device.toString(), device.getCount(), device.getCount() * device.getPrice()});
                 }
-                this.devices.clear();
+                devices.clear();
             }
         }
         return deviceList;

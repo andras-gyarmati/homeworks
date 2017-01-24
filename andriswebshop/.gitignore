@@ -1,2 +1,3 @@
-nb-configuration.xml
-jboss.*.xml
+nb-configuration\.xml
+jboss-app.xml
+jboss.xml
