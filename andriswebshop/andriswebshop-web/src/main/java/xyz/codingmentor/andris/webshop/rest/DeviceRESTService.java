@@ -73,7 +73,7 @@ public class DeviceRESTService implements Serializable {
         return deviceDB.getAllDevice();
     }
 
-    private UserEntity isLoggedIn(HttpSession session) {
+    private static UserEntity isLoggedIn(HttpSession session) {
         if (session.getAttribute(UserRESTService.USER_KEY) == null) {
             throw new NotLoggedInException("You should log in first!");
         }

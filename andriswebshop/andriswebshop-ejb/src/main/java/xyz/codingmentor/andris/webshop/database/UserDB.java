@@ -1,9 +1,9 @@
 package xyz.codingmentor.andris.webshop.database;
 
+import java.io.Serializable;
 import xyz.codingmentor.andris.webshop.exceptions.UserNotFoundException;
 import xyz.codingmentor.andris.webshop.exceptions.UsernameTakenException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,17 +21,9 @@ import xyz.codingmentor.andris.webshop.interceptor.ValidatorInterceptor;
  */
 @Singleton
 @Interceptors(ValidatorInterceptor.class)
-public class UserDB {
+public class UserDB implements Serializable {
 
     private static final Map<String, UserEntity> USERS = new HashMap<>();
-    public static UserDB INSTANCE;
-
-    public static UserDB getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = new UserDB();
-        }
-        return INSTANCE;
-    }
 
     public UserDB() {
         //empty
@@ -55,7 +47,7 @@ public class UserDB {
         }
         return USERS.get(user.getUsername());
     }
-    
+
     public UserEntity getUser(String username) {
         if (null == USERS.get(username)) {
             throw new UserNotFoundException("Error! User: " + username + " is can not be found!");

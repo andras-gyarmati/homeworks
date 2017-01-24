@@ -47,9 +47,9 @@ public class CartRESTService implements Serializable {
     @POST
     @Path("/delete")
     @Consumes(MediaType.APPLICATION_JSON)
-    public DeviceEntity deleteFromCart(@Context HttpServletRequest request, DeviceEntity device) {
+    public ResultDTO deleteFromCart(@Context HttpServletRequest request, DeviceEntity device) {
         checkCredentials(request);
-        return cart.removeDevice(device, device.getCount());
+        return new ResultDTO(ResultType.SUCCESS, cart.removeDevice(device, device.getCount()));
     }
 
     /**
@@ -73,7 +73,7 @@ public class CartRESTService implements Serializable {
         return devicesToBuy;
     }
 
-    private void checkCredentials(HttpServletRequest request) {
+    private static void checkCredentials(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute(UserRESTService.USER_KEY) == null) {
             throw new NotLoggedInException("You should log in first!");

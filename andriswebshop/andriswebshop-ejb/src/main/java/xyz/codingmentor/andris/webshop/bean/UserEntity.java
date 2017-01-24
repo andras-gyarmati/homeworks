@@ -1,5 +1,6 @@
 package xyz.codingmentor.andris.webshop.bean;
 
+import java.io.Serializable;
 import xyz.codingmentor.andris.webshop.enums.Sex;
 import java.util.Date;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import xyz.codingmentor.andris.webshop.constraint.BirthDate;
 @Name
 @BirthDate
 @Validate
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @NotNull
     @Size(min = 6)

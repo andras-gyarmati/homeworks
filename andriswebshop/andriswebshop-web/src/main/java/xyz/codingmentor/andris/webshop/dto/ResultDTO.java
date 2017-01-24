@@ -11,6 +11,7 @@ public class ResultDTO<T> {
     private T message;
 
     public ResultDTO() {
+        //empty
     }
 
     public ResultDTO(ResultType result, T message) {

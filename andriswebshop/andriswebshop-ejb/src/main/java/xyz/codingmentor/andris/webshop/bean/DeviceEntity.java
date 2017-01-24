@@ -1,5 +1,6 @@
 package xyz.codingmentor.andris.webshop.bean;
 
+import java.io.Serializable;
 import java.util.Objects;
 import xyz.codingmentor.andris.webshop.enums.Color;
 import xyz.codingmentor.andris.webshop.enums.Manufacturer;
@@ -15,7 +16,7 @@ import xyz.codingmentor.andris.webshop.constraint.DeviceColor;
  */
 @DeviceColor
 @Validate
-public class DeviceEntity {
+public class DeviceEntity implements Serializable {
 
     @NotNull
     @Size(min = 36, max = 36)

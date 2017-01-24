@@ -1,5 +1,6 @@
-    package xyz.codingmentor.andris.webshop.database;
+package xyz.codingmentor.andris.webshop.database;
 
+import java.io.Serializable;
 import xyz.codingmentor.andris.webshop.exceptions.DeviceAlreadyStoredException;
 import xyz.codingmentor.andris.webshop.exceptions.DeviceNotFoundException;
 import java.util.ArrayList;
@@ -19,10 +20,10 @@ import xyz.codingmentor.andris.webshop.interceptor.ValidatorInterceptor;
  */
 @Singleton
 @Interceptors(ValidatorInterceptor.class)
-public class DeviceDB {
+public class DeviceDB implements Serializable {
 
     private static final Map<String, DeviceEntity> DEVICES = new HashMap<>();
-    
+
     @ExcludeClassInterceptors
     public DeviceEntity addDevice(DeviceEntity device) {
         if (null != DEVICES.get(device.getId())) {

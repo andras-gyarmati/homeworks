@@ -1,5 +1,6 @@
 package xyz.codingmentor.andris.webshop.service;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import xyz.codingmentor.andris.webshop.exceptions.WrongAmountException;
  */
 @Stateful
 @SessionScoped
-public class Cart {
+public class Cart implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(Cart.class.getName());
     private final Map<String, DeviceEntity> devices = new HashMap<>();

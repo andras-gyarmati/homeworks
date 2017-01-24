@@ -26,7 +26,7 @@ public class UserDBTest {
 
     @BeforeClass
     public static void init() {
-        userDB = UserDB.getInstance();
+        userDB = new UserDB();
     }
 
     @Before
