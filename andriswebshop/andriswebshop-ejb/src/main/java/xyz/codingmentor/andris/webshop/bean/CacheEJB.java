@@ -54,8 +54,11 @@ public class CacheEJB {
         ObjectMapper mapper = new ObjectMapper();
         List<DeviceEntity> devices = mapper.readValue(new File(getClass().getClassLoader().getResource(filename).getFile()), new TypeReference<List<DeviceEntity>>() {
         });
+        int count;
         for (DeviceEntity device : devices) {
+            count = device.getCount();
             deviceDB.addDevice(device);
+            device.setCount(count);
         }
     }
 }

@@ -25,7 +25,6 @@ import xyz.codingmentor.andris.webshop.service.Cart;
  */
 @Path("/cart")
 @Produces(MediaType.APPLICATION_JSON)
-@SessionScoped
 public class CartRESTService implements Serializable {
 
     @EJB
@@ -58,7 +57,7 @@ public class CartRESTService implements Serializable {
     @GET
     public List<DeviceEntity> getCart(@Context HttpServletRequest request) {
         checkCredentials(request);
-        return cart.getAllDevices();
+        return cart.getAllDevice();
     }
 
     /**
@@ -75,7 +74,7 @@ public class CartRESTService implements Serializable {
 
     private static void checkCredentials(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute(UserRESTService.USER_KEY) == null) {
+        if (null == session.getAttribute(UserRESTService.USER_KEY)) {
             throw new NotLoggedInException("You should log in first!");
         }
     }

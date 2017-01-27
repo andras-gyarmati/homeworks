@@ -28,7 +28,6 @@ import xyz.codingmentor.andris.webshop.exceptions.AuthenticationFailureException
  * @author beianelete
  */
 @Path("/users")
-@SessionScoped
 public class UserRESTService implements Serializable {
 
     public static final String USER_KEY = "user";

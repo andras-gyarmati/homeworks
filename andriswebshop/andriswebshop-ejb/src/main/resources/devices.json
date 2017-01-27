@@ -3,7 +3,7 @@
 	"type": "iPhone 6",
 	"price": "240000",
 	"color": "BLACK",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -11,7 +11,7 @@
 	"type": "Galaxy S2",
 	"price": "30000",
 	"color": "WHITE",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -19,7 +19,7 @@
 	"type": "One",
 	"price": "100000",
 	"color": "WHITE",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -27,7 +27,7 @@
 	"type": "Two",
 	"price": "90000",
 	"color": "BLACK",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -35,7 +35,7 @@
 	"type": "iPhone 6",
 	"price": "240000",
 	"color": "WHITE",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -43,7 +43,7 @@
 	"type": "Galaxy S3",
 	"price": "60000",
 	"color": "BLACK",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -51,7 +51,7 @@
 	"type": "One",
 	"price": "110000",
 	"color": "GREEN",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -59,7 +59,7 @@
 	"type": "Three",
 	"price": "130000",
 	"color": "BLACK",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -67,7 +67,7 @@
 	"type": "iPhone 7",
 	"price": "280000",
 	"color": "BLACK",
-	"count": "0"
+	"count": "3"
 }
 ,
 {
@@ -75,5 +75,5 @@
 	"type": "Galaxy S4",
 	"price": "90000",
 	"color": "GREEN",
-	"count": "0"
+	"count": "3"
 }]

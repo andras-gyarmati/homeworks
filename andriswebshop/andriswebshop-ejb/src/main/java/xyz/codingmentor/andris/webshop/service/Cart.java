@@ -48,7 +48,7 @@ public class Cart implements Serializable {
         } else {
             throw new WrongAmountException("The amount of devices in the database is less than you want to add!");
         }
-        return getAllDevices();
+        return getAllDevice();
     }
 
     public DeviceEntity removeDevice(DeviceEntity device, int count) {
@@ -67,7 +67,7 @@ public class Cart implements Serializable {
 
     @Remove
     public void removeAllDevices() {
-        List<DeviceEntity> deviceList = getAllDevices();
+        List<DeviceEntity> deviceList = getAllDevice();
         for (DeviceEntity device : deviceList) {
             removeDevice(device, device.getCount());
         }
@@ -77,22 +77,21 @@ public class Cart implements Serializable {
         return totalPrice;
     }
 
-    public List<DeviceEntity> getAllDevices() {
+    public List<DeviceEntity> getAllDevice() {
         return new ArrayList<>(devices.values());
     }
 
-    @Remove
     public List<DeviceEntity> buyCart() {
-        List<DeviceEntity> deviceList = getAllDevices();
-        if (0 == devices.size()) {
+        List<DeviceEntity> deviceList = getAllDevice();
+        if (0 == deviceList.size()) {
             LOGGER.log(Level.INFO, "Your cart is empty!");
         } else {
-            for (DeviceEntity device : devices.values()) {
+            for (DeviceEntity device : deviceList) {
                 if (0 != device.getCount()) {
                     LOGGER.log(Level.INFO, "Purchased: {0} count: {1} price: {2}", new Object[]{device.toString(), device.getCount(), device.getCount() * device.getPrice()});
                 }
-                devices.clear();
             }
+            devices.clear();
         }
         return deviceList;
     }
