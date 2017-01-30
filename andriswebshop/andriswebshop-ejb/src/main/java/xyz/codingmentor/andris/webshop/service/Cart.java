@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
 import xyz.codingmentor.andris.webshop.database.DeviceDB;
@@ -20,7 +19,6 @@ import xyz.codingmentor.andris.webshop.exceptions.WrongAmountException;
  * @author brianelete
  */
 @Stateful
-@SessionScoped
 public class Cart implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(Cart.class.getName());
@@ -37,18 +35,18 @@ public class Cart implements Serializable {
         this.deviceDB = deviceDB;
     }
 
-    public List<DeviceEntity> addDevice(DeviceEntity device, int count) {
-        if (count <= deviceDB.getDevice(device.getId()).getCount()) {
-            DeviceEntity addedDevice = new DeviceEntity(null, device.getManufacturer(), device.getType(), device.getPrice(), device.getColor(), count);
-            addedDevice.setId(device.getId());
-            device.setCount(device.getCount() - count);
-            devices.put(addedDevice.getId(), addedDevice);
-            totalPrice += addedDevice.getPrice() * count;
-            LOGGER.log(Level.INFO, "{0} added, count: {1} price: {2}", new Object[]{addedDevice.toString(), addedDevice.getCount(), addedDevice.getCount() * addedDevice.getPrice()});
+    public List<DeviceEntity> addDevice(String id, int count) {
+        if (count <= deviceDB.getDevice(id).getCount()) {
+            DeviceEntity deviceToAdd = new DeviceEntity(null, deviceDB.getDevice(id).getManufacturer(), deviceDB.getDevice(id).getType(), deviceDB.getDevice(id).getPrice(), deviceDB.getDevice(id).getColor(), count);
+            deviceToAdd.setId(id); 
+            deviceDB.getDevice(id).setCount(deviceDB.getDevice(id).getCount() - count);
+            addDeviceOrIncreaseCount(deviceToAdd);
+            totalPrice += deviceToAdd.getPrice() * count;
+            LOGGER.log(Level.INFO, "{0} added, count: {1} price: {2}", new Object[]{deviceToAdd.toString(), deviceToAdd.getCount(), deviceToAdd.getCount() * deviceToAdd.getPrice()});
         } else {
             throw new WrongAmountException("The amount of devices in the database is less than you want to add!");
         }
-        return getAllDevice();
+        return getCart();
     }
 
     public DeviceEntity removeDevice(DeviceEntity device, int count) {
@@ -67,7 +65,7 @@ public class Cart implements Serializable {
 
     @Remove
     public void removeAllDevices() {
-        List<DeviceEntity> deviceList = getAllDevice();
+        List<DeviceEntity> deviceList = getCart();
         for (DeviceEntity device : deviceList) {
             removeDevice(device, device.getCount());
         }
@@ -77,13 +75,13 @@ public class Cart implements Serializable {
         return totalPrice;
     }
 
-    public List<DeviceEntity> getAllDevice() {
+    public List<DeviceEntity> getCart() {
         return new ArrayList<>(devices.values());
     }
 
     public List<DeviceEntity> buyCart() {
-        List<DeviceEntity> deviceList = getAllDevice();
-        if (0 == deviceList.size()) {
+        List<DeviceEntity> deviceList = getCart();
+        if (deviceList.isEmpty()) {
             LOGGER.log(Level.INFO, "Your cart is empty!");
         } else {
             for (DeviceEntity device : deviceList) {
@@ -94,5 +92,13 @@ public class Cart implements Serializable {
             devices.clear();
         }
         return deviceList;
+    }
+
+    private void addDeviceOrIncreaseCount(DeviceEntity addedDevice) {
+        if (devices.containsKey(addedDevice.getId())) {
+            devices.get(addedDevice.getId()).setCount(devices.get(addedDevice.getId()).getCount() + addedDevice.getCount());
+        } else {
+            devices.put(addedDevice.getId(), addedDevice);
+        }
     }
 }

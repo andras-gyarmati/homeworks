@@ -26,6 +26,7 @@ import xyz.codingmentor.andris.webshop.exception.NotLoggedInException;
  * @author beianelete
  */
 @Path("/devices")
+@SessionScoped
 public class DeviceRESTService implements Serializable {
 
     public static final String USER_KEY = "user";

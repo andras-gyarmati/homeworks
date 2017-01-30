@@ -24,6 +24,7 @@ import xyz.codingmentor.andris.webshop.service.Cart;
  * @author beianelete
  */
 @Path("/cart")
+@SessionScoped
 @Produces(MediaType.APPLICATION_JSON)
 public class CartRESTService implements Serializable {
 
@@ -37,7 +38,7 @@ public class CartRESTService implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResultDTO addToCart(@Context HttpServletRequest request, DeviceEntity device) {
         checkCredentials(request);
-        return new ResultDTO(ResultType.SUCCESS, cart.addDevice(device, device.getCount()));
+        return new ResultDTO(ResultType.SUCCESS, cart.addDevice(device.getId(), device.getCount()));
     }
     
     /**
@@ -57,7 +58,7 @@ public class CartRESTService implements Serializable {
     @GET
     public List<DeviceEntity> getCart(@Context HttpServletRequest request) {
         checkCredentials(request);
-        return cart.getAllDevice();
+        return cart.getCart();
     }
 
     /**
