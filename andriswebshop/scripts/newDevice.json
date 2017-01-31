@@ -1,8 +1,8 @@
 {
-	"id": "97a7819f-238e-4e17-a8ee-0ef0d8d17807",
-	"manufacturer": "HTC",
-	"type": "newDevice",
-	"price": "240000",
-	"color": "BLACK",
-	"count": "1"
+	"id": "51cc8888-4797-4bc5-8f25-2bd0fdaf38b1",
+	"manufacturer": "SAMSUNG",
+	"type": "Galaxy S2",
+	"price": 30000,
+	"color": "WHITE",
+	"count": 1
 }

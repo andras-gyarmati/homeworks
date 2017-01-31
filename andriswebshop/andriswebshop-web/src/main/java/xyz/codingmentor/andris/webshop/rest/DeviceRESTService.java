@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -46,8 +47,7 @@ public class DeviceRESTService implements Serializable {
         return new ResultDTO(ResultType.ERROR, newDevice);
     }
 
-    @POST
-    @Path("/delete")
+    @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultDTO deleteDevice(@Context HttpServletRequest request, DeviceEntity deleteDevice) {
@@ -60,14 +60,13 @@ public class DeviceRESTService implements Serializable {
     }
 
     @GET
-    @Path("/get/{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public DeviceEntity getDevice(@PathParam("id") String id) {
         return deviceDB.getDevice(id);
     }
 
     @GET
-    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<DeviceEntity> getAllDevice() {
         return deviceDB.getAllDevice();

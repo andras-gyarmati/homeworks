@@ -20,7 +20,7 @@ public class NotLoggedInExceptionMapper implements ExceptionMapper<NotLoggedInEx
 
     @Override
     public Response toResponse(NotLoggedInException throwable) {
-        LOGGER.log(Level.SEVERE, "General Exception", throwable);
+        LOGGER.log(Level.SEVERE, "Not Logged In Exception", throwable);
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new ResultDTO(ResultType.ERROR, throwable.getMessage() + " - " + throwable.getCause())).type(MediaType.APPLICATION_JSON).build();
     }
 

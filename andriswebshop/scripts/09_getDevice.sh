@@ -1,1 +1,0 @@
-curl --verbose --write-out "\n" --request GET --cookie-jar cart-cookies.txt --cookie cart-cookies.txt http://localhost:8080/andriswebshop-web/shop/devices/get/3f10552b-293c-49eb-ac75-b767865fdb22

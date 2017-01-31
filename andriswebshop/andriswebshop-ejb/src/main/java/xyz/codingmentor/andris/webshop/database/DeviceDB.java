@@ -22,7 +22,7 @@ import xyz.codingmentor.andris.webshop.interceptor.ValidatorInterceptor;
 @Interceptors(ValidatorInterceptor.class)
 public class DeviceDB implements Serializable {
 
-    private static final Map<String, DeviceEntity> DEVICES = new HashMap<>();
+    private final Map<String, DeviceEntity> DEVICES = new HashMap<>();
 
     @ExcludeClassInterceptors
     public DeviceEntity addDevice(DeviceEntity device) {

@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -42,10 +43,9 @@ public class CartRESTService implements Serializable {
     }
     
     /**
-     * http://localhost:8080/andriswebshop-web/shop/cart/delete
+     * http://localhost:8080/andriswebshop-web/shop/cart
      */
-    @POST
-    @Path("/delete")
+    @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public ResultDTO deleteFromCart(@Context HttpServletRequest request, DeviceEntity device) {
         checkCredentials(request);

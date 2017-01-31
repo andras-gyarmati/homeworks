@@ -23,7 +23,7 @@ import xyz.codingmentor.andris.webshop.interceptor.ValidatorInterceptor;
 @Interceptors(ValidatorInterceptor.class)
 public class UserDB implements Serializable {
 
-    private static final Map<String, UserEntity> USERS = new HashMap<>();
+    private final Map<String, UserEntity> USERS = new HashMap<>();
 
     public UserDB() {
         //empty

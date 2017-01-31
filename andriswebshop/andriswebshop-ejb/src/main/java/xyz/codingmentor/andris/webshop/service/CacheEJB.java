@@ -1,4 +1,4 @@
-package xyz.codingmentor.andris.webshop.bean;
+package xyz.codingmentor.andris.webshop.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import xyz.codingmentor.andris.webshop.bean.DeviceEntity;
+import xyz.codingmentor.andris.webshop.bean.UserEntity;
 import xyz.codingmentor.andris.webshop.database.DeviceDB;
 import xyz.codingmentor.andris.webshop.database.UserDB;
 

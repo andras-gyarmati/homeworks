@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -77,8 +78,7 @@ public class UserRESTService implements Serializable {
         return new ResultDTO(ResultType.ERROR, newUser);
     }
     
-    @POST
-    @Path("/delete")
+    @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ResultDTO deleteUser(@Context HttpServletRequest request, UserEntity deleteUser) {
@@ -91,14 +91,13 @@ public class UserRESTService implements Serializable {
     }
     
     @GET
-    @Path("/get/{username}")
+    @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserEntity getUser(@PathParam("username") String username) {
         return userDB.getUser(username);
     }
     
     @GET
-    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserEntity> getAllUser() {
         return userDB.getAllUser();
