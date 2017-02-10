@@ -70,16 +70,14 @@ public class JPASculptorRepo {
     public List<SculptorEntity> getAllSculptor() throws RepositoryException {
         String selectQuery = "SELECT s FROM SculptorEntity s";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
-        List<SculptorEntity> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     public List<SculptorEntity> findSculptorByName(String name) throws RepositoryException {
         String selectQuery = "SELECT s FROM SculptorEntity s WHERE s.name LIKE :name";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         query.setParameter("name", "%" + name + "%");
-        List<SculptorEntity> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     public List<WorkshopEntity> findWorkshopsBySculptor(String name) throws RepositoryException {
@@ -94,8 +92,7 @@ public class JPASculptorRepo {
         String selectQuery = "SELECT s FROM SculptorEntity s WHERE :workshop MEMBER OF s.workshops";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         query.setParameter("workshop", workshop);
-        List<SculptorEntity> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     public List<SculptureEntity> findSculpturesBySculptor(String name) throws RepositoryException {

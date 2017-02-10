@@ -2,12 +2,10 @@ package xyz.codingmentor.andrisjpa.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,10 +29,11 @@ public class WorkshopEntity implements Serializable {
     private Material material;
     @Embedded
     private Address address;
-    @ManyToMany(mappedBy = "workshops", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "workshops")
     private List<SculptorEntity> sculptors;
 
     public WorkshopEntity() {
+        //empty
     }
 
     public Long getId() {

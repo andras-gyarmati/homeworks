@@ -7,6 +7,7 @@ package xyz.codingmentor.andrisjpa.api;
 public class RepositoryException extends Exception {
 
     public RepositoryException() {
+        //empty
     }
 
     public RepositoryException(String message) {

@@ -9,6 +9,11 @@ import xyz.codingmentor.andrisjpa.api.RepositoryException;
  * @author brianelete
  */
 public class Main {
+
+    private Main() {
+        //empty
+    }
+
     public static void main(String[] args) throws RepositoryException {
         Weld weld = new Weld();
         WeldContainer container = weld.initialize();

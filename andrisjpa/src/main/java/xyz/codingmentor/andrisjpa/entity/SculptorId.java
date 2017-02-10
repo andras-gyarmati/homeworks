@@ -22,6 +22,7 @@ public class SculptorId implements Serializable {
     }
 
     public SculptorId() {
+        //empty
     }
 
     public Date getBirthDate() {

@@ -1,6 +1,5 @@
 package xyz.codingmentor.andrisjpa;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +25,11 @@ public class App {
 
     private SculptorCRUDService sculptureCRUDService;
     private SculptorJPQLService sculptureJPQLService;
+    @Inject
+    private Logger logger;
 
     public App() {
+        //empty
     }
 
     @Inject
@@ -36,16 +38,9 @@ public class App {
         this.sculptureJPQLService = sculptureJPQLService;
     }
 
-    @Inject
-    private Logger logger;
-
     public void execute() throws RepositoryException {
-
         sculptureCRUDService.createSculptor(newDate(1994, 3, 4), "John Doe");
-
         SculptorEntity sculptor01 = sculptureCRUDService.findSculptor(newDate(1994, 3, 4), "John Doe");
-//        sculptor01.setBirthDate(newDate(1994, 3, 4));
-//        sculptor01.setName("John Doe");
         sculptor01.setSex(Sex.MALE);
         WorkshopEntity workshop01 = new WorkshopEntity();
         Address address01 = new Address();
@@ -71,20 +66,17 @@ public class App {
         List sculptures = new ArrayList<>();
         sculptures.add(sculpture01);
         sculptor01.setSculptures(sculptures);
-
         sculptureCRUDService.updateSculptor(sculptor01);
-
         List<SculptorEntity> allSculptors = sculptureJPQLService.getAllSculptor();
         List<SculptorEntity> foundSculptorsByName = sculptureJPQLService.findSculptorByName(allSculptors.get(0).getName());
         List<WorkshopEntity> foundWorkshopsBySculptor = sculptureJPQLService.findWorkshopsBySculptor(foundSculptorsByName.get(0).getName());
         List<SculptorEntity> foundSculptorsByWorkshop = sculptureJPQLService.findSculptorsByWorkshop(foundWorkshopsBySculptor.get(0));
         List<SculptureEntity> foundSculpturesBySculptor = sculptureJPQLService.findSculpturesBySculptor(foundSculptorsByWorkshop.get(0).getName());
         logger.log(Level.INFO, foundSculpturesBySculptor.get(0).getName());
-
         sculptureCRUDService.deleteSculptor(sculptor01.getBirthDate(), sculptor01.getName());
     }
 
-    private Date newDate(int year, int month, int day) {
+    private static Date newDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         return calendar.getTime();

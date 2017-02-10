@@ -33,12 +33,13 @@ public class SculptorEntity implements Serializable {
     private String name;
     @Enumerated(EnumType.STRING)
     private Sex sex;
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade={CascadeType.ALL})
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<SculptureEntity> sculptures;
-    @ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<WorkshopEntity> workshops;
 
     public SculptorEntity() {
+        //empty
     }
 
     public Date getBirthDate() {

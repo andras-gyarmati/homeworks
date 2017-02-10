@@ -18,7 +18,7 @@ public class SculptorJPQLService {
     private JPASculptorRepo sculptureRepo;
 
     public SculptorJPQLService() {
-
+        //empty
     }
 
     @Inject
@@ -45,9 +45,9 @@ public class SculptorJPQLService {
     public List<SculptureEntity> findSculpturesBySculptor(String name) throws RepositoryException {
         return sculptureRepo.findSculpturesBySculptor(name);
     }
-    
+
     @PreDestroy
-    private void preDestroy() {
+    public void preDestroy() {
         sculptureRepo.close();
     }
 }

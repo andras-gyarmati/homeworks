@@ -16,7 +16,7 @@ public class SculptorCRUDService {
     private JPASculptorRepo sculptorRepo;
 
     public SculptorCRUDService() {
-
+        //empty
     }
 
     @Inject
@@ -41,7 +41,7 @@ public class SculptorCRUDService {
     }
 
     @PreDestroy
-    private void preDestroy() {
+    public void preDestroy() {
         sculptorRepo.close();
     }
 }

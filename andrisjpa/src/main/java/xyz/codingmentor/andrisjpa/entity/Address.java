@@ -17,6 +17,7 @@ public class Address implements Serializable {
     private String country;
 
     public Address() {
+        //empty
     }
 
     public String getStreet() {
