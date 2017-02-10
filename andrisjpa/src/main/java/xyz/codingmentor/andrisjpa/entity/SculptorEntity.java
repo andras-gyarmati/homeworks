@@ -3,7 +3,11 @@ package xyz.codingmentor.andrisjpa.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToMany;
@@ -23,14 +27,15 @@ import xyz.codingmentor.andrisjpa.enums.Sex;
 public class SculptorEntity implements Serializable {
 
     @Id
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Id
     private String name;
+    @Enumerated(EnumType.STRING)
     private Sex sex;
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private List<SculptureEntity> sculptures;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL})
     private List<WorkshopEntity> workshops;
 
     public SculptorEntity() {

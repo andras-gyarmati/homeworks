@@ -13,6 +13,17 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core</artifactId>
+            <version>2.4.1.Final</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jandex</artifactId>
+            <version>2.0.3.Final</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.1.Final</version>
@@ -22,6 +33,11 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1212.jre7</version>
         </dependency>
     </dependencies>
     <properties>

@@ -2,8 +2,11 @@ package xyz.codingmentor.andrisjpa.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,13 +23,13 @@ import xyz.codingmentor.andrisjpa.enums.Material;
 public class SculptureEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Material material;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private SculptorEntity creator;
 
     public SculptureEntity() {

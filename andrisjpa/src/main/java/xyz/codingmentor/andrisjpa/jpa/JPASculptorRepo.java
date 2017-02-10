@@ -1,5 +1,6 @@
 package xyz.codingmentor.andrisjpa.jpa;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import xyz.codingmentor.andrisjpa.api.RepositoryException;
 import xyz.codingmentor.andrisjpa.entity.SculptorEntity;
+import xyz.codingmentor.andrisjpa.entity.SculptorId;
 import xyz.codingmentor.andrisjpa.entity.SculptureEntity;
 import xyz.codingmentor.andrisjpa.entity.WorkshopEntity;
 
@@ -17,18 +19,20 @@ import xyz.codingmentor.andrisjpa.entity.WorkshopEntity;
  * @author brianelete
  */
 @Stateless
-public class JPASculptureRepo {
+public class JPASculptorRepo {
 
     private final EntityManagerFactory factory;
     private final EntityManager entityManager;
 
-    public JPASculptureRepo() {
+    public JPASculptorRepo() {
         factory = Persistence.createEntityManagerFactory("andrisjpaPU");
         entityManager = factory.createEntityManager();
     }
 
-    public SculptureEntity createSculpture() throws RepositoryException {
-        SculptureEntity sculptor = new SculptureEntity();
+    public SculptorEntity createSculptor(Date birthDate, String name) throws RepositoryException {
+        SculptorEntity sculptor = new SculptorEntity();
+        sculptor.setName(name);
+        sculptor.setBirthDate(birthDate);
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         entityManager.persist(sculptor);
@@ -36,75 +40,72 @@ public class JPASculptureRepo {
         return sculptor;
     }
 
-    public SculptureEntity readSculpture(String sculptureId) throws RepositoryException {
-        SculptureEntity sculpture = entityManager.find(SculptureEntity.class, sculptureId);
-        if (null != sculpture) {
-            return sculpture;
+    public SculptorEntity findSculptor(Date birthDate, String name) throws RepositoryException {
+        SculptorId id = new SculptorId(birthDate, name);
+        SculptorEntity sculptor = entityManager.find(SculptorEntity.class, id);
+        if (null != sculptor) {
+            return sculptor;
         }
         return null;
     }
 
-    public void updateSculpture(SculptureEntity sculpture) throws RepositoryException {
+    public void updateSculptor(SculptorEntity upToDateSculptor) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        SculptureEntity entity = entityManager.find(SculptureEntity.class, sculpture.getId());
-        entity.setCreationDate(sculpture.getCreationDate());
-        entity.setCreator(sculpture.getCreator());
-        entity.setMaterial(sculpture.getMaterial());
-        entity.setName(sculpture.getName());
-        entityManager.merge(entity);
+        entityManager.merge(upToDateSculptor);
         tx.commit();
     }
 
-    public void deleteSculpture(String id) throws RepositoryException {
+    public void deleteSculptor(Date birthDate, String name) throws RepositoryException {
+        SculptorId id = new SculptorId(birthDate, name);
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        SculptureEntity sculpture = entityManager.find(SculptureEntity.class, id);
-        if (null != sculpture) {
-            entityManager.remove(sculpture);
+        SculptorEntity sculptor = entityManager.find(SculptorEntity.class, id);
+        if (null != sculptor) {
+            entityManager.remove(sculptor);
         }
         tx.commit();
     }
-    
+
     public List<SculptorEntity> getAllSculptor() throws RepositoryException {
-        String selectQuery = "SELECT s FROM sculptor s";
+        String selectQuery = "SELECT s FROM SculptorEntity s";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         List<SculptorEntity> result = query.getResultList();
         return result;
     }
-    
+
     public List<SculptorEntity> findSculptorByName(String name) throws RepositoryException {
-        String selectQuery = "SELECT s FROM sculptor s WHERE s.name LIKE :name";
+        String selectQuery = "SELECT s FROM SculptorEntity s WHERE s.name LIKE :name";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
-        query.setParameter("title", "%" + name + "%");
+        query.setParameter("name", "%" + name + "%");
         List<SculptorEntity> result = query.getResultList();
         return result;
     }
-    
+
     public List<WorkshopEntity> findWorkshopsBySculptor(String name) throws RepositoryException {
-        String selectQuery = "SELECT s.workshops FROM sculptor s WHERE s.name = :name";
-        TypedQuery<WorkshopEntity> query = entityManager.createQuery(selectQuery, WorkshopEntity.class);
+        String selectQuery = "SELECT s FROM SculptorEntity s WHERE s.name = :name";
+        TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         query.setParameter("name", name);
-        List<WorkshopEntity> result = query.getResultList();
-        return result;
+        List<SculptorEntity> sculptors = query.getResultList();
+        return sculptors.get(0).getWorkshops();
     }
-    
+
     public List<SculptorEntity> findSculptorsByWorkshop(WorkshopEntity workshop) throws RepositoryException {
-        String selectQuery = "SELECT s FROM sculptor s WHERE :workshop MEMBER OF s.workshops";
+        String selectQuery = "SELECT s FROM SculptorEntity s WHERE :workshop MEMBER OF s.workshops";
         TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         query.setParameter("workshop", workshop);
         List<SculptorEntity> result = query.getResultList();
         return result;
     }
-    
-    public List<SculptureEntity> findSculptorsByWorkshop(String name) throws RepositoryException {
-        String selectQuery = "SELECT s.workshops FROM sculptor s WHERE s.name = :name";
-        TypedQuery<SculptureEntity> query = entityManager.createQuery(selectQuery, SculptureEntity.class);
+
+    public List<SculptureEntity> findSculpturesBySculptor(String name) throws RepositoryException {
+        String selectQuery = "SELECT s FROM SculptorEntity s WHERE s.name = :name";
+        TypedQuery<SculptorEntity> query = entityManager.createQuery(selectQuery, SculptorEntity.class);
         query.setParameter("name", name);
-        List<SculptureEntity> result = query.getResultList();
-        return result;
+        List<SculptorEntity> sculptors = query.getResultList();
+        return sculptors.get(0).getSculptures();
     }
-    
+
     public void close() {
         factory.close();
         entityManager.close();

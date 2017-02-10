@@ -2,11 +2,14 @@ package xyz.codingmentor.andrisjpa.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -21,14 +24,14 @@ import xyz.codingmentor.andrisjpa.enums.Material;
 public class WorkshopEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
     private Material material;
     @Embedded
     private Address address;
-    @ManyToMany(mappedBy = "workshops")
+    @ManyToMany(mappedBy = "workshops", fetch = FetchType.EAGER)
     private List<SculptorEntity> sculptors;
 
     public WorkshopEntity() {

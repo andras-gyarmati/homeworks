@@ -12,9 +12,14 @@ import javax.persistence.TemporalType;
  */
 public class SculptorId implements Serializable {
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     private String name;
+
+    public SculptorId(Date birthDate, String name) {
+        this.birthDate = birthDate;
+        this.name = name;
+    }
 
     public SculptorId() {
     }

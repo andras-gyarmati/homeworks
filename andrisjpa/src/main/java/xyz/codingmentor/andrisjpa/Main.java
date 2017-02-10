@@ -2,13 +2,14 @@ package xyz.codingmentor.andrisjpa;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
+import xyz.codingmentor.andrisjpa.api.RepositoryException;
 
 /**
  *
  * @author brianelete
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RepositoryException {
         Weld weld = new Weld();
         WeldContainer container = weld.initialize();
         App application = container.instance().select(App.class).get();
