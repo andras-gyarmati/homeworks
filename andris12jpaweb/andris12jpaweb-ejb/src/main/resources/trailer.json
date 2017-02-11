@@ -7,14 +7,8 @@
     },
     {
         "id": 2,
-        "platform": "YOUTUBE",
-        "title": "Movie02 - trailer",
-        "url": "youtube.com/movie02trailer"
-    },
-    {
-        "id": 3,
         "platform": "VIMEO",
-        "title": "Movie03 - trailer",
-        "url": "vimeo.com/movie03trailer"
+        "title": "Movie02 - trailer",
+        "url": "vimeo.com/movie02trailer"
     }
 ]

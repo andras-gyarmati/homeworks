@@ -1,0 +1,1 @@
+curl --verbose --write-out "\n" --request PUT --data @newMovie_u.json --header "Content-Type: application/json" --cookie-jar cart-cookies.txt --cookie cart-cookies.txt 'http://localhost:8080/andris12jpaweb-web/rest/movie'

@@ -10,11 +10,5 @@
         "firstName": "Two",
         "lastName": "Tom",
         "nationality": "Twoland"
-    },
-    {
-        "id": 3,
-        "firstName": "Three",
-        "lastName": "Ted",
-        "nationality": "Threeland"
     }
 ]
