@@ -22,23 +22,23 @@ public class MovieCRUDRepo implements MovieCRUDRepo_ {
     }
 
     @Override
-    public void persist(MovieEntity movie) throws RepoException {
+    public void create(MovieEntity movie) throws RepoException {
         entityManager.persist(movie);
     }
 
     @Override
-    public MovieEntity find(Long Id) throws RepoException {
+    public MovieEntity read(Long Id) throws RepoException {
         return entityManager.find(MovieEntity.class, Id);
     }
 
     @Override
-    public MovieEntity merge(MovieEntity movie) throws RepoException {
+    public MovieEntity update(MovieEntity movie) throws RepoException {
         return entityManager.merge(movie);
     }
 
     @Override
-    public void remove(Long Id) throws RepoException {
-        entityManager.remove(find(Id));
+    public void delete(Long Id) throws RepoException {
+        entityManager.remove(read(Id));
     }
     
 }

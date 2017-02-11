@@ -15,5 +15,5 @@ public interface CategoryCRUDService_ {
 
     CategoryEntity updateEntity(CategoryEntity category) throws RepoException;
 
-    void removeEntity(Long Id) throws RepoException;
+    void deleteEntity(Long Id) throws RepoException;
 }

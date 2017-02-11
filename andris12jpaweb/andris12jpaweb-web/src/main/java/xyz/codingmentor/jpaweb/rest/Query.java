@@ -34,25 +34,25 @@ public class Query {
 
     @GET
     @Path("movie")
-    public List<MovieEntity> getMovie(@QueryParam("title") String title, @QueryParam("categoryId") Long categoryId) {
-        return jpqlService.getMovie(categoryId, title);
+    public List<MovieEntity> getMovieByCategoryAndOrName(@QueryParam("title") String title, @QueryParam("categoryId") Long categoryId) {
+        return jpqlService.getMovieByCategoryAndOrName(categoryId, title);
     }
 
     @GET
     @Path("actor")
-    public List<ActorEntity> getActor(@QueryParam("movieId") Long movieId, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
-        return jpqlService.getActor(movieId, firstName, lastName);
+    public List<ActorEntity> getActorByMovieAndOrName(@QueryParam("movieId") Long movieId, @QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+        return jpqlService.getActorByMovieAndOrName(movieId, firstName, lastName);
     }
 
     @GET
     @Path("actor/{nationality}")
-    public List<ActorEntity> getActorByNat(@PathParam("nationality") String nat) {
+    public List<ActorEntity> getActorByNationality(@PathParam("nationality") String nat) {
         return jpqlService.getActorByNationality(nat);
     }
 
     @GET
     @Path("trailer")
-    public List<TrailerEntity> getTrailer(@QueryParam("movieId") Long movieId) {
+    public List<TrailerEntity> getTrailerByMovie(@QueryParam("movieId") Long movieId) {
         return jpqlService.getTrailerByMovie(movieId);
     }
 

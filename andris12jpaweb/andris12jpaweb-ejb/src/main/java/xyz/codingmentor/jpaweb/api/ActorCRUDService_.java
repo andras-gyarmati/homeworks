@@ -15,5 +15,5 @@ public interface ActorCRUDService_ {
 
     ActorEntity updateEntity(ActorEntity actor) throws RepoException;
 
-    void removeEntity(Long Id) throws RepoException;
+    void deleteEntity(Long Id) throws RepoException;
 }

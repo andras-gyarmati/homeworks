@@ -43,7 +43,7 @@ public class MovieCRUD implements MovieCRUDResource_ {
 
     @Override
     public Response deleteEntityById(Long Id) throws RepoException {
-        movieCRUDService.removeEntity(Id);
+        movieCRUDService.deleteEntity(Id);
         return Response.ok().build();
     }
 

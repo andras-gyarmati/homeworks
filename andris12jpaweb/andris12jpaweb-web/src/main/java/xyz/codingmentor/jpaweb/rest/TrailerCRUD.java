@@ -43,7 +43,7 @@ public class TrailerCRUD implements TrailerCRUDResource_ {
 
     @Override
     public Response deleteEntityById(Long Id) throws RepoException {
-        trailerCRUDService.removeEntity(Id);
+        trailerCRUDService.deleteEntity(Id);
         return Response.ok().build();
     }
 

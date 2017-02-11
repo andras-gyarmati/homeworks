@@ -22,23 +22,23 @@ public class CategoryCRUDRepo implements CategoryCRUDRepo_ {
     }
 
     @Override
-    public void persist(CategoryEntity category) throws RepoException {
+    public void create(CategoryEntity category) throws RepoException {
         entityManager.persist(category);
     }
 
     @Override
-    public CategoryEntity find(Long Id) throws RepoException {
+    public CategoryEntity read(Long Id) throws RepoException {
         return entityManager.find(CategoryEntity.class, Id);
     }
 
     @Override
-    public CategoryEntity merge(CategoryEntity category) throws RepoException {
+    public CategoryEntity update(CategoryEntity category) throws RepoException {
         return entityManager.merge(category);
     }
 
     @Override
-    public void remove(Long Id) throws RepoException {
-        entityManager.remove(find(Id));
+    public void delete(Long Id) throws RepoException {
+        entityManager.remove(read(Id));
     }
     
 }

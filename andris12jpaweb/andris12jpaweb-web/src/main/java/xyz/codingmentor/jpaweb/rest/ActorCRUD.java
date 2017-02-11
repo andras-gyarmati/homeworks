@@ -43,7 +43,7 @@ public class ActorCRUD implements ActorCRUDResource_ {
 
     @Override
     public Response deleteEntityById(Long Id) throws RepoException {
-        actorCRUDService.removeEntity(Id);
+        actorCRUDService.deleteEntity(Id);
         return Response.ok().build();
     }
 

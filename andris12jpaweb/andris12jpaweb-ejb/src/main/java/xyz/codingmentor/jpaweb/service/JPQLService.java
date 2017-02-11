@@ -20,7 +20,7 @@ public class JPQLService {
     @PersistenceContext(unitName = "jpawebPU")
     private EntityManager entityManager;
 
-    public List<MovieEntity> getMovie(Long categoryId, String title) {
+    public List<MovieEntity> getMovieByCategoryAndOrName(Long categoryId, String title) {
         if (null != categoryId && null != title) {
             String selectQuery = "SELECT m FROM MovieEntity m WHERE m.category.id = :categoryId AND m.title = :title";
             TypedQuery<MovieEntity> query = entityManager.createQuery(selectQuery, MovieEntity.class);
@@ -41,7 +41,7 @@ public class JPQLService {
         throw new EmptyParametersException("Error! Empty input");
     }
 
-    public List<ActorEntity> getActor(Long movieId, String firstName, String lastName) {
+    public List<ActorEntity> getActorByMovieAndOrName(Long movieId, String firstName, String lastName) {
         if (null != firstName && null != lastName) {
             if (null != movieId) {
                 String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE m.id = :movieId AND a.firstName = :firstName AND a.lastName = :lastName";

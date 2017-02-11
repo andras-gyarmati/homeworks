@@ -15,5 +15,5 @@ public interface MovieCRUDService_ {
 
     MovieEntity updateEntity(MovieEntity movie) throws RepoException;
 
-    void removeEntity(Long Id) throws RepoException;
+    void deleteEntity(Long Id) throws RepoException;
 }

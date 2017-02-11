@@ -9,11 +9,11 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 public interface CategoryCRUDRepo_ {
 
-    void persist(CategoryEntity category) throws RepoException;
+    void create(CategoryEntity category) throws RepoException;
 
-    CategoryEntity find(Long Id) throws RepoException;
+    CategoryEntity read(Long Id) throws RepoException;
 
-    CategoryEntity merge(CategoryEntity category) throws RepoException;
+    CategoryEntity update(CategoryEntity category) throws RepoException;
 
-    void remove(Long Id) throws RepoException;
+    void delete(Long Id) throws RepoException;
 }

@@ -22,23 +22,23 @@ public class TrailerCRUDRepo implements TrailerCRUDRepo_ {
     }
 
     @Override
-    public void persist(TrailerEntity trailer) throws RepoException {
+    public void create(TrailerEntity trailer) throws RepoException {
         entityManager.persist(trailer);
     }
 
     @Override
-    public TrailerEntity find(Long Id) throws RepoException {
+    public TrailerEntity read(Long Id) throws RepoException {
         return entityManager.find(TrailerEntity.class, Id);
     }
 
     @Override
-    public TrailerEntity merge(TrailerEntity trailer) throws RepoException {
+    public TrailerEntity update(TrailerEntity trailer) throws RepoException {
         return entityManager.merge(trailer);
     }
 
     @Override
-    public void remove(Long Id) throws RepoException {
-        entityManager.remove(find(Id));
+    public void delete(Long Id) throws RepoException {
+        entityManager.remove(read(Id));
     }
     
 }

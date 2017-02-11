@@ -22,23 +22,23 @@ public class ActorCRUDRepo implements ActorCRUDRepo_ {
     }
 
     @Override
-    public void persist(ActorEntity actor) throws RepoException {
+    public void create(ActorEntity actor) throws RepoException {
         entityManager.persist(actor);
     }
 
     @Override
-    public ActorEntity find(Long Id) throws RepoException {
+    public ActorEntity read(Long Id) throws RepoException {
         return entityManager.find(ActorEntity.class, Id);
     }
 
     @Override
-    public ActorEntity merge(ActorEntity actor) throws RepoException {
+    public ActorEntity update(ActorEntity actor) throws RepoException {
         return entityManager.merge(actor);
     }
 
     @Override
-    public void remove(Long Id) throws RepoException {
-        entityManager.remove(find(Id));
+    public void delete(Long Id) throws RepoException {
+        entityManager.remove(read(Id));
     }
     
 }

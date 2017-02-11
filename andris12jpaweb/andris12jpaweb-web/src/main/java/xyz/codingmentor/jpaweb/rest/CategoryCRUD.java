@@ -43,7 +43,7 @@ public class CategoryCRUD implements CategoryCRUDResource_ {
 
     @Override
     public Response deleteEntityById(Long Id) throws RepoException {
-        categoryCRUDService.removeEntity(Id);
+        categoryCRUDService.deleteEntity(Id);
         return Response.ok().build();
     }
 

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import xyz.codingmentor.jpaweb.enum_.LinkType;
+import xyz.codingmentor.jpaweb.enum_.Platform;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TrailerEntity implements Serializable {
     private Long id;
     private String url;
     @Enumerated(EnumType.STRING)
-    private LinkType linkType;
+    private Platform platform;
     private String title;
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
@@ -52,12 +52,12 @@ public class TrailerEntity implements Serializable {
         this.url = url;
     }
 
-    public LinkType getLinkType() {
-        return linkType;
+    public Platform getPlatform() {
+        return platform;
     }
 
-    public void setLinkType(LinkType linkType) {
-        this.linkType = linkType;
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     public String getTitle() {

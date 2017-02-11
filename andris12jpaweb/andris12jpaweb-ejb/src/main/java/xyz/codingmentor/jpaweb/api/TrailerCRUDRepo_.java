@@ -9,11 +9,11 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 public interface TrailerCRUDRepo_ {
 
-    void persist(TrailerEntity trailer) throws RepoException;
+    void create(TrailerEntity trailer) throws RepoException;
 
-    TrailerEntity find(Long Id) throws RepoException;
+    TrailerEntity read(Long Id) throws RepoException;
 
-    TrailerEntity merge(TrailerEntity trailer) throws RepoException;
+    TrailerEntity update(TrailerEntity trailer) throws RepoException;
 
-    void remove(Long Id) throws RepoException;
+    void delete(Long Id) throws RepoException;
 }

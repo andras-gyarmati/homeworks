@@ -9,11 +9,11 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 public interface MovieCRUDRepo_ {
 
-    void persist(MovieEntity movie) throws RepoException;
+    void create(MovieEntity movie) throws RepoException;
 
-    MovieEntity find(Long Id) throws RepoException;
+    MovieEntity read(Long Id) throws RepoException;
 
-    MovieEntity merge(MovieEntity movie) throws RepoException;
+    MovieEntity update(MovieEntity movie) throws RepoException;
 
-    void remove(Long Id) throws RepoException;
+    void delete(Long Id) throws RepoException;
 }

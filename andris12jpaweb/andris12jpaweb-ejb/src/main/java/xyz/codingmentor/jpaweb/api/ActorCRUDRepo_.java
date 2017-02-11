@@ -9,11 +9,11 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 public interface ActorCRUDRepo_ {
 
-    void persist(ActorEntity actor) throws RepoException;
+    void create(ActorEntity actor) throws RepoException;
 
-    ActorEntity find(Long Id) throws RepoException;
+    ActorEntity read(Long Id) throws RepoException;
 
-    ActorEntity merge(ActorEntity actor) throws RepoException;
+    ActorEntity update(ActorEntity actor) throws RepoException;
 
-    void remove(Long Id) throws RepoException;
+    void delete(Long Id) throws RepoException;
 }

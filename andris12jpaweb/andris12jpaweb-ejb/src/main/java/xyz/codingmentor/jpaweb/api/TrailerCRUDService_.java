@@ -15,5 +15,5 @@ public interface TrailerCRUDService_ {
 
     TrailerEntity updateEntity(TrailerEntity trailer) throws RepoException;
 
-    void removeEntity(Long Id) throws RepoException;
+    void deleteEntity(Long Id) throws RepoException;
 }
