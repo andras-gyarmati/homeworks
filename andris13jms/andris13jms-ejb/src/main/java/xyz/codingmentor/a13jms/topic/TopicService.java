@@ -1,6 +1,7 @@
 package xyz.codingmentor.a13jms.topic;
 
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.Topic;
@@ -11,6 +12,7 @@ import xyz.codingmentor.a13jms.entity.Flight;
  *
  * @author brianelete
  */
+@Stateless
 public class TopicService implements ITopic {
 
     @Inject

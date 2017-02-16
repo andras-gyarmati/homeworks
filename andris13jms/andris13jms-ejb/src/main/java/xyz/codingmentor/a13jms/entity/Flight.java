@@ -1,6 +1,7 @@
 package xyz.codingmentor.a13jms.entity;
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -72,6 +73,47 @@ public class Flight {
     @Override
     public String toString() {
         return "Flight{" + "id=" + id + ", departureLocation=" + departureLocation + ", destination=" + destination + ", departureDate=" + departureDate + ", arrivalDate=" + arrivalDate + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.departureLocation);
+        hash = 17 * hash + Objects.hashCode(this.destination);
+        hash = 17 * hash + Objects.hashCode(this.departureDate);
+        hash = 17 * hash + Objects.hashCode(this.arrivalDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Flight other = (Flight) obj;
+        if (!Objects.equals(this.departureLocation, other.departureLocation)) {
+            return false;
+        }
+        if (!Objects.equals(this.destination, other.destination)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.departureDate, other.departureDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.arrivalDate, other.arrivalDate)) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -2,10 +2,10 @@ package xyz.codingmentor.a13jms.topic;
 
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import xyz.codingmentor.a13jms.api.IService;
 import xyz.codingmentor.a13jms.api.ITopic;
@@ -16,13 +16,12 @@ import xyz.codingmentor.a13jms.ex.RepoEx;
  *
  * @author brianelete
  */
-@Singleton
-@Startup
+@Stateless
 public class DepartureCheck {
 
     private ITopic iTopic;
     private IService iService;
-    List<Flight> sent;
+    Map<Long, Flight> sent;
 
     public DepartureCheck() {
         //empty
@@ -32,19 +31,19 @@ public class DepartureCheck {
     public DepartureCheck(ITopic iTopic, IService iService) {
         this.iTopic = iTopic;
         this.iService = iService;
-        sent = new ArrayList<>();
+        sent = new HashMap<>();
     }
 
-    @Schedule(second = "*/10")
+    @Schedule(hour = "*", minute = "*", second = "*/10", persistent = false)
     public void checkIfFlightDepartsWithinAnHour() throws RepoEx {
         Date now = new Date();
         Date future = new Date(System.currentTimeMillis() + 3600 * 1000);
         List<Flight> flights = iService.getAll();
         for (Flight flight : flights) {
             Date departure = flight.getDepartureDate();
-            if (departure.after(now) && departure.before(future) && !sent.contains(flight)) {
+            if (!sent.containsKey(flight.getId()) && departure.after(now) && departure.before(future)) {
                 iTopic.sendDepartsSoon(flight);
-                sent.add(flight);
+                sent.put(flight.getId(), flight);
             }
         }
     }

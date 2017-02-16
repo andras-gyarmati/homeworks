@@ -14,7 +14,6 @@ import xyz.codingmentor.a13jms.ex.RepoEx;
  */
 @Stateless
 public class FlightRepo implements IRepo {
-
     
     @PersistenceContext(unitName = "flightjmsPU")
     private EntityManager em;
@@ -23,22 +22,30 @@ public class FlightRepo implements IRepo {
     public void create(Flight flight) throws RepoEx {
         em.persist(flight);
     }
-
+    
     @Override
     public Flight read(Long flightId) throws RepoEx {
         return em.find(Flight.class, flightId);
     }
-
+    
     @Override
     public Flight update(Flight flight) throws RepoEx {
-        return em.merge(flight);
+        Flight dbFlight = em.find(Flight.class, flight.getId());
+        if (null == dbFlight) {
+            return em.merge(flight);
+        }
+        dbFlight.setDepartureDate(flight.getDepartureDate());
+        dbFlight.setArrivalDate(flight.getArrivalDate());
+        dbFlight.setDestination(flight.getDestination());
+        dbFlight.setDepartureLocation(flight.getDepartureLocation());
+        return em.merge(dbFlight);
     }
-
+    
     @Override
     public void delete(Long flightId) throws RepoEx {
         em.remove(em.find(Flight.class, flightId));
     }
-
+    
     @Override
     public List<Flight> getAll() throws RepoEx {
         return em.createQuery("SELECT f FROM Flight f", Flight.class).getResultList();

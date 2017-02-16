@@ -1,6 +1,7 @@
 package xyz.codingmentor.a13jms.service;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import xyz.codingmentor.a13jms.api.IRepo;
 import xyz.codingmentor.a13jms.api.IService;
@@ -11,6 +12,7 @@ import xyz.codingmentor.a13jms.ex.RepoEx;
  *
  * @author brianelete
  */
+@Stateless
 public class FlightService implements IService {
 
     @Inject
