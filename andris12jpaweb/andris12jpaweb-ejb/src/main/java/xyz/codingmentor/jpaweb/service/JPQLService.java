@@ -27,14 +27,10 @@ public class JPQLService {
             query.setParameter("categoryId", categoryId);
             query.setParameter("title", title);
             return query.getResultList();
-        } else if (null != categoryId) {
-            String selectQuery = "SELECT m FROM MovieEntity m WHERE m.category.id = :categoryId";
+        } else if (null != categoryId || null != title) {
+            String selectQuery = "SELECT m FROM MovieEntity m WHERE m.category.id = :categoryId OR m.title = :title";
             TypedQuery<MovieEntity> query = entityManager.createQuery(selectQuery, MovieEntity.class);
             query.setParameter("categoryId", categoryId);
-            return query.getResultList();
-        } else if (null != title) {
-            String selectQuery = "SELECT m FROM MovieEntity m WHERE m.title = :title";
-            TypedQuery<MovieEntity> query = entityManager.createQuery(selectQuery, MovieEntity.class);
             query.setParameter("title", title);
             return query.getResultList();
         }
@@ -42,24 +38,18 @@ public class JPQLService {
     }
 
     public List<ActorEntity> getActorByMovieAndOrName(Long movieId, String firstName, String lastName) {
-        if (null != firstName && null != lastName) {
-            if (null != movieId) {
-                String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE m.id = :movieId AND a.firstName = :firstName AND a.lastName = :lastName";
-                TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
-                query.setParameter("movieId", movieId);
-                query.setParameter("firstName", firstName);
-                query.setParameter("lastName", lastName);
-                return query.getResultList();
-            } else {
-                String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE a.firstName = :firstName AND a.lastName = :lastName";
-                TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
-                query.setParameter("firstName", firstName);
-                query.setParameter("lastName", lastName);
-                return query.getResultList();
-            }
-        } else if (null != movieId) {
-            String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE m.id = :movieId";
+        if (null != firstName && null != lastName && null != movieId) {
+            String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE m.id = :movieId AND a.firstName = :firstName AND a.lastName = :lastName";
             TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
+            query.setParameter("movieId", movieId);
+            query.setParameter("firstName", firstName);
+            query.setParameter("lastName", lastName);
+            return query.getResultList();
+        } else if ((null != firstName && null != lastName) || null != movieId) {
+            String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE (a.firstName = :firstName AND a.lastName = :lastName) OR m.id = :movieId";
+            TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
+            query.setParameter("firstName", firstName);
+            query.setParameter("lastName", lastName);
             query.setParameter("movieId", movieId);
             return query.getResultList();
         }
