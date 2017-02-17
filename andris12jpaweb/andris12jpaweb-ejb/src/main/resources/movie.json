@@ -1,10 +1,16 @@
 [
     {
         "id": 1,
-        "title": "Movie01"
+        "title": "Movie01",
+        "actors": ["1"],
+        "trailers": ["1"],
+        "category": 1
     },
     {
         "id": 2,
-        "title": "Movie02"
+        "title": "Movie02",
+        "actors": ["2"],
+        "trailers": ["2"],
+        "category": 2
     }
 ]

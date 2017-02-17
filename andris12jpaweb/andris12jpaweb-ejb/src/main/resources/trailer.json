@@ -3,12 +3,16 @@
         "id": 1,
         "platform": "YOUTUBE",
         "title": "Movie01 - trailer",
-        "url": "youtube.com/movie01trailer"
+        "url": "youtube.com/movie01trailer",
+        "releaseDate": "2015-10-10",
+        "movie": 1
     },
     {
         "id": 2,
         "platform": "VIMEO",
         "title": "Movie02 - trailer",
-        "url": "vimeo.com/movie02trailer"
+        "url": "vimeo.com/movie02trailer",
+        "releaseDate": "2014-05-05",
+        "movie": 2
     }
 ]

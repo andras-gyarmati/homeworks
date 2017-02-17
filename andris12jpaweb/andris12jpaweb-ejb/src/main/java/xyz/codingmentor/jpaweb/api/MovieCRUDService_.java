@@ -1,5 +1,6 @@
 package xyz.codingmentor.jpaweb.api;
 
+import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
@@ -9,11 +10,13 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 public interface MovieCRUDService_ {
     
-    void createEntity(MovieEntity movie) throws RepoException;
+    void create(MovieDTO movie) throws RepoException;
 
-    MovieEntity getEntityById(Long Id) throws RepoException;
+    MovieEntity read(Long Id) throws RepoException;
 
-    MovieEntity updateEntity(MovieEntity movie) throws RepoException;
+    MovieEntity update(MovieEntity movie) throws RepoException;
+    
+    MovieEntity update(MovieDTO movie) throws RepoException;
 
-    void deleteEntity(Long Id) throws RepoException;
+    void delete(Long Id) throws RepoException;
 }

@@ -28,7 +28,6 @@ public class ApplicationConfig extends Application {
         resources.add(xyz.codingmentor.jpaweb.exception.RepoExceptionMapper.class);
         resources.add(xyz.codingmentor.jpaweb.rest.ActorCRUD.class);
         resources.add(xyz.codingmentor.jpaweb.rest.CategoryCRUD.class);
-        resources.add(xyz.codingmentor.jpaweb.rest.Connect.class);
         resources.add(xyz.codingmentor.jpaweb.rest.MovieCRUD.class);
         resources.add(xyz.codingmentor.jpaweb.rest.Query.class);
         resources.add(xyz.codingmentor.jpaweb.rest.TrailerCRUD.class);

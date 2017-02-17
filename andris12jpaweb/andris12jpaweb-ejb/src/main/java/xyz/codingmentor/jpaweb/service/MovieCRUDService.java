@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import xyz.codingmentor.jpaweb.api.MovieCRUDRepo_;
 import xyz.codingmentor.jpaweb.api.MovieCRUDService_;
+import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
@@ -26,22 +27,27 @@ public class MovieCRUDService implements MovieCRUDService_ {
     }
 
     @Override
-    public void createEntity(MovieEntity movie) throws RepoException {
+    public void create(MovieDTO movie) throws RepoException {
         repo.create(movie);
     }
 
     @Override
-    public MovieEntity getEntityById(Long Id) throws RepoException {
+    public MovieEntity read(Long Id) throws RepoException {
         return repo.read(Id);
     }
 
     @Override
-    public MovieEntity updateEntity(MovieEntity movie) throws RepoException {
+    public MovieEntity update(MovieEntity movie) throws RepoException {
         return repo.update(movie);
     }
 
     @Override
-    public void deleteEntity(Long Id) throws RepoException {
+    public MovieEntity update(MovieDTO movie) throws RepoException {
+        return repo.update(movie);
+    }
+
+    @Override
+    public void delete(Long Id) throws RepoException {
         repo.delete(Id);
     }
     

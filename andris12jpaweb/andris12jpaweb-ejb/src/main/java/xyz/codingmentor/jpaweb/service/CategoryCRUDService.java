@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import xyz.codingmentor.jpaweb.api.CategoryCRUDRepo_;
 import xyz.codingmentor.jpaweb.api.CategoryCRUDService_;
+import xyz.codingmentor.jpaweb.dto.CategoryDTO;
 import xyz.codingmentor.jpaweb.entity.CategoryEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
@@ -26,22 +27,27 @@ public class CategoryCRUDService implements CategoryCRUDService_ {
     }
 
     @Override
-    public void createEntity(CategoryEntity category) throws RepoException {
+    public void create(CategoryDTO category) throws RepoException {
         repo.create(category);
     }
 
     @Override
-    public CategoryEntity getEntityById(Long Id) throws RepoException {
+    public CategoryEntity read(Long Id) throws RepoException {
         return repo.read(Id);
     }
 
     @Override
-    public CategoryEntity updateEntity(CategoryEntity category) throws RepoException {
+    public CategoryEntity update(CategoryEntity category) throws RepoException {
         return repo.update(category);
     }
 
     @Override
-    public void deleteEntity(Long Id) throws RepoException {
+    public CategoryEntity update(CategoryDTO category) throws RepoException {
+        return repo.update(category);
+    }
+
+    @Override
+    public void delete(Long Id) throws RepoException {
         repo.delete(Id);
     }
     

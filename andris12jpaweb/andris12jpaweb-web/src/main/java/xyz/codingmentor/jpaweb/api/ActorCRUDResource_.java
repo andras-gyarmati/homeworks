@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.entity.ActorEntity;
+import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
 /**
@@ -22,7 +22,7 @@ public interface ActorCRUDResource_ {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createEntity(ActorEntity actor) throws RepoException;
+    Response createEntity(ActorDTO actor) throws RepoException;
 
     @GET
     @Path("/{id}")
@@ -32,7 +32,7 @@ public interface ActorCRUDResource_ {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateEntity(ActorEntity actor) throws RepoException;
+    Response updateEntity(ActorDTO actor) throws RepoException;
 
     @DELETE
     @Path("/{id}")

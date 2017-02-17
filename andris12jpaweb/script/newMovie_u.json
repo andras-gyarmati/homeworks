@@ -1,4 +1,7 @@
 {
     "id": 3,
-    "title": "Movie03_u"
+    "title": "Movie03_u",
+    "actors": ["1"],
+    "trailers": ["1"],
+    "category": 1
 }

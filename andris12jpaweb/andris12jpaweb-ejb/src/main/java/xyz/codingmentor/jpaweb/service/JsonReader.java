@@ -15,10 +15,10 @@ import xyz.codingmentor.jpaweb.api.ActorCRUDService_;
 import xyz.codingmentor.jpaweb.api.CategoryCRUDService_;
 import xyz.codingmentor.jpaweb.api.MovieCRUDService_;
 import xyz.codingmentor.jpaweb.api.TrailerCRUDService_;
-import xyz.codingmentor.jpaweb.entity.ActorEntity;
-import xyz.codingmentor.jpaweb.entity.CategoryEntity;
-import xyz.codingmentor.jpaweb.entity.MovieEntity;
-import xyz.codingmentor.jpaweb.entity.TrailerEntity;
+import xyz.codingmentor.jpaweb.dto.ActorDTO;
+import xyz.codingmentor.jpaweb.dto.CategoryDTO;
+import xyz.codingmentor.jpaweb.dto.MovieDTO;
+import xyz.codingmentor.jpaweb.dto.TrailerDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
 /**
@@ -54,21 +54,21 @@ public class JsonReader {
 
     private void readFromJson(String actorFileName, String categoryFileName, String movieFileName, String trailerFileName) throws IOException, RepoException {
         ObjectMapper mapper = new ObjectMapper();
-        List<ActorEntity> actors = mapper.readValue(new File(getClass().getClassLoader().getResource(actorFileName).getFile()), new TypeReference<List<ActorEntity>>() {});
-        List<CategoryEntity> categories = mapper.readValue(new File(getClass().getClassLoader().getResource(categoryFileName).getFile()), new TypeReference<List<CategoryEntity>>() {});
-        List<MovieEntity> movies = mapper.readValue(new File(getClass().getClassLoader().getResource(movieFileName).getFile()), new TypeReference<List<MovieEntity>>() {});
-        List<TrailerEntity> trailers = mapper.readValue(new File(getClass().getClassLoader().getResource(trailerFileName).getFile()), new TypeReference<List<TrailerEntity>>() {});
-        for (ActorEntity actor : actors) {
-            actorService.createEntity(actor);
+        List<ActorDTO> actors = mapper.readValue(new File(getClass().getClassLoader().getResource(actorFileName).getFile()), new TypeReference<List<ActorDTO>>() {});
+        List<CategoryDTO> categories = mapper.readValue(new File(getClass().getClassLoader().getResource(categoryFileName).getFile()), new TypeReference<List<CategoryDTO>>() {});
+        List<MovieDTO> movies = mapper.readValue(new File(getClass().getClassLoader().getResource(movieFileName).getFile()), new TypeReference<List<MovieDTO>>() {});
+        List<TrailerDTO> trailers = mapper.readValue(new File(getClass().getClassLoader().getResource(trailerFileName).getFile()), new TypeReference<List<TrailerDTO>>() {});
+        for (ActorDTO actor : actors) {
+            actorService.create(actor);
         }
-        for (CategoryEntity category : categories) {
-            categoryService.createEntity(category);
+        for (CategoryDTO category : categories) {
+            categoryService.create(category);
         }
-        for (MovieEntity movie : movies) {
-            movieService.createEntity(movie);
+        for (MovieDTO movie : movies) {
+            movieService.create(movie);
         }
-        for (TrailerEntity trailer : trailers) {
-            trailerService.createEntity(trailer);
+        for (TrailerDTO trailer : trailers) {
+            trailerService.create(trailer);
         }
     }
 }

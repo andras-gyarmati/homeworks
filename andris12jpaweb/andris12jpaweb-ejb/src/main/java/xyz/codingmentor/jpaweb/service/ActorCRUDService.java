@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import xyz.codingmentor.jpaweb.api.ActorCRUDRepo_;
 import xyz.codingmentor.jpaweb.api.ActorCRUDService_;
+import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.entity.ActorEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
@@ -26,22 +27,27 @@ public class ActorCRUDService implements ActorCRUDService_ {
     }
 
     @Override
-    public void createEntity(ActorEntity actor) throws RepoException {
+    public void create(ActorDTO actor) throws RepoException {
         repo.create(actor);
     }
 
     @Override
-    public ActorEntity getEntityById(Long Id) throws RepoException {
+    public ActorEntity read(Long Id) throws RepoException {
         return repo.read(Id);
     }
 
     @Override
-    public ActorEntity updateEntity(ActorEntity actor) throws RepoException {
+    public ActorEntity update(ActorEntity actor) throws RepoException {
+        return repo.update(actor);
+    }
+    
+    @Override
+    public ActorEntity update(ActorDTO actor) throws RepoException {
         return repo.update(actor);
     }
 
     @Override
-    public void deleteEntity(Long Id) throws RepoException {
+    public void delete(Long Id) throws RepoException {
         repo.delete(Id);
     }
     

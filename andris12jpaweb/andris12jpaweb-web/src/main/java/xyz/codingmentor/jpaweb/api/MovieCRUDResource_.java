@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.entity.MovieEntity;
+import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
 
 /**
@@ -22,21 +22,21 @@ public interface MovieCRUDResource_ {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createEntity(MovieEntity movie) throws RepoException;
+    Response create(MovieDTO movie) throws RepoException;
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Response getEntityById(@PathParam("id") Long Id) throws RepoException;
+    Response read(@PathParam("id") Long Id) throws RepoException;
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateEntity(MovieEntity movie) throws RepoException;
+    Response update(MovieDTO movie) throws RepoException;
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEntityById(@PathParam("id") Long Id) throws RepoException;
+    public Response delete(@PathParam("id") Long Id) throws RepoException;
     
 }

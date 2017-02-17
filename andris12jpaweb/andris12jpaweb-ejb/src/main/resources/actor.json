@@ -3,12 +3,14 @@
         "id": 1,
         "firstName": "One",
         "lastName": "Owen",
-        "nationality": "Oneland"
+        "nationality": "Oneland",
+        "movies": ["1"]
     },
     {
         "id": 2,
         "firstName": "Two",
         "lastName": "Tom",
-        "nationality": "Twoland"
+        "nationality": "Twoland",
+        "movies": ["2"]
     }
 ]

@@ -1,32 +1,20 @@
-package xyz.codingmentor.jpaweb.entity;
+package xyz.codingmentor.jpaweb.dto;
 
-import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author brianelete
  */
-@Entity
-@Table(name = "actor")
-public class ActorEntity implements Serializable {
+public class ActorDTO {
 
-    @Id
     private Long id;
     private String firstName;
     private String lastName;
     private String nationality;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @XmlTransient
-    private List<MovieEntity> movies;
+    private List<Long> movies;
 
-    public ActorEntity() {
+    public ActorDTO() {
         //empty
     }
 
@@ -62,12 +50,11 @@ public class ActorEntity implements Serializable {
         this.nationality = nationality;
     }
 
-    @XmlTransient
-    public List<MovieEntity> getMovies() {
+    public List<Long> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<MovieEntity> movies) {
+    public void setMovies(List<Long> movies) {
         this.movies = movies;
     }
 

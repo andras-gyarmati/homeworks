@@ -1,10 +1,12 @@
 [
     {
         "id": 1,
-        "name": "comedy"
+        "name": "comedy",
+        "movies": ["1"]
     },
     {
         "id": 2,
-        "name": "drama"
+        "name": "drama",
+        "movies": ["2"]
     }
 ]

@@ -51,6 +51,7 @@ public class MovieEntity implements Serializable {
         this.title = title;
     }
 
+    @XmlTransient
     public List<ActorEntity> getActors() {
         return actors;
     }
@@ -59,6 +60,7 @@ public class MovieEntity implements Serializable {
         this.actors = actors;
     }
 
+    @XmlTransient
     public List<TrailerEntity> getTrailers() {
         return trailers;
     }
@@ -74,5 +76,5 @@ public class MovieEntity implements Serializable {
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
-    
+
 }
