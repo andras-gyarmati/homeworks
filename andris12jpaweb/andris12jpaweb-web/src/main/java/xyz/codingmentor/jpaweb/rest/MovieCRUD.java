@@ -5,10 +5,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.api.MovieCRUDResource_;
-import xyz.codingmentor.jpaweb.api.MovieCRUDService_;
 import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDService;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDResource;
 
 /**
  * REST Web Service
@@ -17,16 +17,16 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 @Path("movie")
 @RequestScoped
-public class MovieCRUD implements MovieCRUDResource_ {
+public class MovieCRUD implements IMovieCRUDResource {
 
-    private final MovieCRUDService_ movieCRUDService;
+    private final IMovieCRUDService movieCRUDService;
 
     public MovieCRUD() {
         movieCRUDService = null;
     }
 
     @Inject
-    public MovieCRUD(MovieCRUDService_ movieCRUDService) {
+    public MovieCRUD(IMovieCRUDService movieCRUDService) {
         this.movieCRUDService = movieCRUDService;
     }
     
@@ -37,8 +37,8 @@ public class MovieCRUD implements MovieCRUDResource_ {
     }
 
     @Override
-    public Response read(Long Id) throws RepoException {
-        return Response.ok(movieCRUDService.read(Id), MediaType.APPLICATION_JSON).build();
+    public Response read(Long id) throws RepoException {
+        return Response.ok(movieCRUDService.read(id), MediaType.APPLICATION_JSON).build();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class MovieCRUD implements MovieCRUDResource_ {
     }
 
     @Override
-    public Response delete(Long Id) throws RepoException {
-        movieCRUDService.delete(Id);
+    public Response delete(Long id) throws RepoException {
+        movieCRUDService.delete(id);
         return Response.ok().build();
     }
 

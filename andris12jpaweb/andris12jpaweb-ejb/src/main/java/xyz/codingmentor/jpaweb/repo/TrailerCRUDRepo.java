@@ -5,16 +5,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpaweb.entity.TrailerEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDRepo_;
 import xyz.codingmentor.jpaweb.dto.TrailerDTO;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDRepo;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class TrailerCRUDRepo implements TrailerCRUDRepo_ {
+public class TrailerCRUDRepo implements ITrailerCRUDRepo {
 
     @PersistenceContext(unitName = "jpawebPU")
     private EntityManager entityManager;
@@ -29,8 +29,8 @@ public class TrailerCRUDRepo implements TrailerCRUDRepo_ {
     }
 
     @Override
-    public TrailerEntity read(Long Id) throws RepoException {
-        return entityManager.find(TrailerEntity.class, Id);
+    public TrailerEntity read(Long id) throws RepoException {
+        return entityManager.find(TrailerEntity.class, id);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class TrailerCRUDRepo implements TrailerCRUDRepo_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        entityManager.remove(read(Id));
+    public void delete(Long id) throws RepoException {
+        entityManager.remove(read(id));
     }
 
     private TrailerEntity buildTrailer(TrailerDTO trailerDTO) {

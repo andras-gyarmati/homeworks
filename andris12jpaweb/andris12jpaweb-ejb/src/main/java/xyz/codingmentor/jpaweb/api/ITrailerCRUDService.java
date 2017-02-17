@@ -8,15 +8,15 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  *
  * @author brianelete
  */
-public interface TrailerCRUDService_ {
+public interface ITrailerCRUDService {
 
     void create(TrailerDTO trailer) throws RepoException;
 
-    TrailerEntity read(Long Id) throws RepoException;
+    TrailerEntity read(Long id) throws RepoException;
 
     TrailerEntity update(TrailerEntity trailer) throws RepoException;
 
     TrailerEntity update(TrailerDTO trailer) throws RepoException;
 
-    void delete(Long Id) throws RepoException;
+    void delete(Long id) throws RepoException;
 }

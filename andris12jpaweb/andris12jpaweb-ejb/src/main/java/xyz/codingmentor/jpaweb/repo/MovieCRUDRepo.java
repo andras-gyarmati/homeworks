@@ -6,18 +6,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
-import xyz.codingmentor.jpaweb.api.MovieCRUDRepo_;
 import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.entity.ActorEntity;
 import xyz.codingmentor.jpaweb.entity.CategoryEntity;
 import xyz.codingmentor.jpaweb.entity.TrailerEntity;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDRepo;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class MovieCRUDRepo implements MovieCRUDRepo_ {
+public class MovieCRUDRepo implements IMovieCRUDRepo {
 
     @PersistenceContext(unitName = "jpawebPU")
     private EntityManager entityManager;
@@ -32,8 +32,8 @@ public class MovieCRUDRepo implements MovieCRUDRepo_ {
     }
 
     @Override
-    public MovieEntity read(Long Id) throws RepoException {
-        return entityManager.find(MovieEntity.class, Id);
+    public MovieEntity read(Long id) throws RepoException {
+        return entityManager.find(MovieEntity.class, id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class MovieCRUDRepo implements MovieCRUDRepo_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        entityManager.remove(read(Id));
+    public void delete(Long id) throws RepoException {
+        entityManager.remove(read(id));
     }
 
     private MovieEntity buildMovie(MovieDTO movieDTO) {

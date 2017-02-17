@@ -2,27 +2,27 @@ package xyz.codingmentor.jpaweb.service;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDRepo_;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDService_;
 import xyz.codingmentor.jpaweb.dto.TrailerDTO;
 import xyz.codingmentor.jpaweb.entity.TrailerEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDService;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDRepo;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class TrailerCRUDService implements TrailerCRUDService_ {
+public class TrailerCRUDService implements ITrailerCRUDService {
 
-    private final TrailerCRUDRepo_ repo;
+    private final ITrailerCRUDRepo repo;
 
     public TrailerCRUDService() {
         repo = null;
     }
 
     @Inject
-    public TrailerCRUDService(TrailerCRUDRepo_ trailerCRUDRepo) {
+    public TrailerCRUDService(ITrailerCRUDRepo trailerCRUDRepo) {
         this.repo = trailerCRUDRepo;
     }
 
@@ -32,8 +32,8 @@ public class TrailerCRUDService implements TrailerCRUDService_ {
     }
 
     @Override
-    public TrailerEntity read(Long Id) throws RepoException {
-        return repo.read(Id);
+    public TrailerEntity read(Long id) throws RepoException {
+        return repo.read(id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class TrailerCRUDService implements TrailerCRUDService_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        repo.delete(Id);
+    public void delete(Long id) throws RepoException {
+        repo.delete(id);
     }
 
 }

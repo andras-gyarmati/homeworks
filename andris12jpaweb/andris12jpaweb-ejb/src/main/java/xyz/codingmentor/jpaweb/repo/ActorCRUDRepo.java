@@ -6,16 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpaweb.entity.ActorEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
-import xyz.codingmentor.jpaweb.api.ActorCRUDRepo_;
 import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
+import xyz.codingmentor.jpaweb.api.IActorCRUDRepo;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class ActorCRUDRepo implements ActorCRUDRepo_ {
+public class ActorCRUDRepo implements IActorCRUDRepo {
 
     @PersistenceContext(unitName = "jpawebPU")
     private EntityManager entityManager;
@@ -30,8 +30,8 @@ public class ActorCRUDRepo implements ActorCRUDRepo_ {
     }
 
     @Override
-    public ActorEntity read(Long Id) throws RepoException {
-        return entityManager.find(ActorEntity.class, Id);
+    public ActorEntity read(Long id) throws RepoException {
+        return entityManager.find(ActorEntity.class, id);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ActorCRUDRepo implements ActorCRUDRepo_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        entityManager.remove(read(Id));
+    public void delete(Long id) throws RepoException {
+        entityManager.remove(read(id));
     }
 
     private ActorEntity buildActor(ActorDTO actorDTO) {

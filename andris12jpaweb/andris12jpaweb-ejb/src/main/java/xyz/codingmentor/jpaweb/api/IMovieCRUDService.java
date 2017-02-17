@@ -8,15 +8,15 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  *
  * @author brianelete
  */
-public interface MovieCRUDService_ {
+public interface IMovieCRUDService {
     
     void create(MovieDTO movie) throws RepoException;
 
-    MovieEntity read(Long Id) throws RepoException;
+    MovieEntity read(Long id) throws RepoException;
 
     MovieEntity update(MovieEntity movie) throws RepoException;
     
     MovieEntity update(MovieDTO movie) throws RepoException;
 
-    void delete(Long Id) throws RepoException;
+    void delete(Long id) throws RepoException;
 }

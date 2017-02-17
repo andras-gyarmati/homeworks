@@ -17,7 +17,7 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  *
  * @author brianelete
  */
-public interface ActorCRUDResource_ {
+public interface IActorCRUDResource {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +27,7 @@ public interface ActorCRUDResource_ {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Response getEntityById(@PathParam("id") Long Id) throws RepoException;
+    Response getEntityById(@PathParam("id") Long id) throws RepoException;
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,6 +37,6 @@ public interface ActorCRUDResource_ {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEntityById(@PathParam("id") Long Id) throws RepoException;
+    public Response deleteEntityById(@PathParam("id") Long id) throws RepoException;
     
 }

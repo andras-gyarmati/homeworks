@@ -5,10 +5,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDResource_;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDService_;
 import xyz.codingmentor.jpaweb.dto.TrailerDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDService;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDResource;
 
 /**
  * REST Web Service
@@ -17,16 +17,16 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 @Path("trailer")
 @RequestScoped
-public class TrailerCRUD implements TrailerCRUDResource_ {
+public class TrailerCRUD implements ITrailerCRUDResource {
 
-    private final TrailerCRUDService_ trailerCRUDService;
+    private final ITrailerCRUDService trailerCRUDService;
 
     public TrailerCRUD() {
         trailerCRUDService = null;
     }
 
     @Inject
-    public TrailerCRUD(TrailerCRUDService_ trailerCRUDService) {
+    public TrailerCRUD(ITrailerCRUDService trailerCRUDService) {
         this.trailerCRUDService = trailerCRUDService;
     }
     
@@ -37,8 +37,8 @@ public class TrailerCRUD implements TrailerCRUDResource_ {
     }
 
     @Override
-    public Response read(Long Id) throws RepoException {
-        return Response.ok(trailerCRUDService.read(Id), MediaType.APPLICATION_JSON).build();
+    public Response read(Long id) throws RepoException {
+        return Response.ok(trailerCRUDService.read(id), MediaType.APPLICATION_JSON).build();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class TrailerCRUD implements TrailerCRUDResource_ {
     }
 
     @Override
-    public Response delete(Long Id) throws RepoException {
-        trailerCRUDService.delete(Id);
+    public Response delete(Long id) throws RepoException {
+        trailerCRUDService.delete(id);
         return Response.ok().build();
     }
 

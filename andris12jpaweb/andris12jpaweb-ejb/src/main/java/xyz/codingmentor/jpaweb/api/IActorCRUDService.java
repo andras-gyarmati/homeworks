@@ -8,15 +8,15 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  *
  * @author brianelete
  */
-public interface ActorCRUDRepo_ {
+public interface IActorCRUDService {
 
     void create(ActorDTO actor) throws RepoException;
 
-    ActorEntity read(Long Id) throws RepoException;
+    ActorEntity read(Long id) throws RepoException;
 
     ActorEntity update(ActorEntity actor) throws RepoException;
 
     ActorEntity update(ActorDTO actor) throws RepoException;
 
-    void delete(Long Id) throws RepoException;
+    void delete(Long id) throws RepoException;
 }

@@ -2,27 +2,27 @@ package xyz.codingmentor.jpaweb.service;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import xyz.codingmentor.jpaweb.api.ActorCRUDRepo_;
-import xyz.codingmentor.jpaweb.api.ActorCRUDService_;
 import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.entity.ActorEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.IActorCRUDRepo;
+import xyz.codingmentor.jpaweb.api.IActorCRUDService;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class ActorCRUDService implements ActorCRUDService_ {
+public class ActorCRUDService implements IActorCRUDService {
 
-    private final ActorCRUDRepo_ repo;
+    private final IActorCRUDRepo repo;
 
     public ActorCRUDService() {
         repo = null;
     }
 
     @Inject
-    public ActorCRUDService(ActorCRUDRepo_ actorCRUDRepo) {
+    public ActorCRUDService(IActorCRUDRepo actorCRUDRepo) {
         this.repo = actorCRUDRepo;
     }
 
@@ -32,8 +32,8 @@ public class ActorCRUDService implements ActorCRUDService_ {
     }
 
     @Override
-    public ActorEntity read(Long Id) throws RepoException {
-        return repo.read(Id);
+    public ActorEntity read(Long id) throws RepoException {
+        return repo.read(id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class ActorCRUDService implements ActorCRUDService_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        repo.delete(Id);
+    public void delete(Long id) throws RepoException {
+        repo.delete(id);
     }
     
 }

@@ -1,4 +1,4 @@
-package xyz.codingmentor.jpaweb.enum_;
+package xyz.codingmentor.jpaweb.enums;
 
 /**
  *

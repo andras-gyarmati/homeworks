@@ -5,10 +5,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.api.CategoryCRUDResource_;
-import xyz.codingmentor.jpaweb.api.CategoryCRUDService_;
 import xyz.codingmentor.jpaweb.dto.CategoryDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.ICategoryCRUDService;
+import xyz.codingmentor.jpaweb.api.ICategoryCRUDResource;
 
 /**
  * REST Web Service
@@ -17,16 +17,16 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 @Path("cat")
 @RequestScoped
-public class CategoryCRUD implements CategoryCRUDResource_ {
+public class CategoryCRUD implements ICategoryCRUDResource {
 
-    private final CategoryCRUDService_ categoryCRUDService;
+    private final ICategoryCRUDService categoryCRUDService;
 
     public CategoryCRUD() {
         categoryCRUDService = null;
     }
 
     @Inject
-    public CategoryCRUD(CategoryCRUDService_ categoryCRUDService) {
+    public CategoryCRUD(ICategoryCRUDService categoryCRUDService) {
         this.categoryCRUDService = categoryCRUDService;
     }
     
@@ -37,8 +37,8 @@ public class CategoryCRUD implements CategoryCRUDResource_ {
     }
 
     @Override
-    public Response read(Long Id) throws RepoException {
-        return Response.ok(categoryCRUDService.read(Id), MediaType.APPLICATION_JSON).build();
+    public Response read(Long id) throws RepoException {
+        return Response.ok(categoryCRUDService.read(id), MediaType.APPLICATION_JSON).build();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class CategoryCRUD implements CategoryCRUDResource_ {
     }
 
     @Override
-    public Response delete(Long Id) throws RepoException {
-        categoryCRUDService.delete(Id);
+    public Response delete(Long id) throws RepoException {
+        categoryCRUDService.delete(id);
         return Response.ok().build();
     }
 

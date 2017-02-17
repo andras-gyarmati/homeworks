@@ -1,7 +1,7 @@
 package xyz.codingmentor.jpaweb.dto;
 
 import java.util.Date;
-import xyz.codingmentor.jpaweb.enum_.Platform;
+import xyz.codingmentor.jpaweb.enums.Platform;
 
 /**
  *

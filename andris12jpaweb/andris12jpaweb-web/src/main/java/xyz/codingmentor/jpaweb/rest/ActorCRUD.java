@@ -5,10 +5,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import xyz.codingmentor.jpaweb.api.ActorCRUDResource_;
-import xyz.codingmentor.jpaweb.api.ActorCRUDService_;
 import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.IActorCRUDService;
+import xyz.codingmentor.jpaweb.api.IActorCRUDResource;
 
 /**
  * REST Web Service
@@ -17,16 +17,16 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  */
 @Path("actor")
 @RequestScoped
-public class ActorCRUD implements ActorCRUDResource_ {
+public class ActorCRUD implements IActorCRUDResource {
 
-    private final ActorCRUDService_ actorCRUDService;
+    private final IActorCRUDService actorCRUDService;
 
     public ActorCRUD() {
         actorCRUDService = null;
     }
     
     @Inject
-    public ActorCRUD(ActorCRUDService_ actorCRUDService) {
+    public ActorCRUD(IActorCRUDService actorCRUDService) {
         this.actorCRUDService = actorCRUDService;
     }
     
@@ -37,8 +37,8 @@ public class ActorCRUD implements ActorCRUDResource_ {
     }
 
     @Override
-    public Response getEntityById(Long Id) throws RepoException {
-        return Response.ok(actorCRUDService.read(Id), MediaType.APPLICATION_JSON).build();
+    public Response getEntityById(Long id) throws RepoException {
+        return Response.ok(actorCRUDService.read(id), MediaType.APPLICATION_JSON).build();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class ActorCRUD implements ActorCRUDResource_ {
     }
 
     @Override
-    public Response deleteEntityById(Long Id) throws RepoException {
-        actorCRUDService.delete(Id);
+    public Response deleteEntityById(Long id) throws RepoException {
+        actorCRUDService.delete(id);
         return Response.ok().build();
     }
 

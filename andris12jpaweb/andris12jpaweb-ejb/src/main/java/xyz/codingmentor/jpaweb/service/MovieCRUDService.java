@@ -2,27 +2,27 @@ package xyz.codingmentor.jpaweb.service;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import xyz.codingmentor.jpaweb.api.MovieCRUDRepo_;
-import xyz.codingmentor.jpaweb.api.MovieCRUDService_;
 import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.entity.MovieEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDRepo;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDService;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class MovieCRUDService implements MovieCRUDService_ {
+public class MovieCRUDService implements IMovieCRUDService {
 
-    private final MovieCRUDRepo_ repo;
+    private final IMovieCRUDRepo repo;
 
     public MovieCRUDService() {
         repo = null;
     }
 
     @Inject
-    public MovieCRUDService(MovieCRUDRepo_ movieCRUDRepo) {
+    public MovieCRUDService(IMovieCRUDRepo movieCRUDRepo) {
         this.repo = movieCRUDRepo;
     }
 
@@ -32,8 +32,8 @@ public class MovieCRUDService implements MovieCRUDService_ {
     }
 
     @Override
-    public MovieEntity read(Long Id) throws RepoException {
-        return repo.read(Id);
+    public MovieEntity read(Long id) throws RepoException {
+        return repo.read(id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class MovieCRUDService implements MovieCRUDService_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        repo.delete(Id);
+    public void delete(Long id) throws RepoException {
+        repo.delete(id);
     }
     
 }

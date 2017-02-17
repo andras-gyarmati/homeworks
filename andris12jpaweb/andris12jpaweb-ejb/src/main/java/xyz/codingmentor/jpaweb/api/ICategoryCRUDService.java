@@ -8,15 +8,15 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
  *
  * @author brianelete
  */
-public interface CategoryCRUDRepo_ {
+public interface ICategoryCRUDService {
 
     void create(CategoryDTO category) throws RepoException;
 
-    CategoryEntity read(Long Id) throws RepoException;
+    CategoryEntity read(Long id) throws RepoException;
 
     CategoryEntity update(CategoryEntity category) throws RepoException;
 
     CategoryEntity update(CategoryDTO category) throws RepoException;
 
-    void delete(Long Id) throws RepoException;
+    void delete(Long id) throws RepoException;
 }

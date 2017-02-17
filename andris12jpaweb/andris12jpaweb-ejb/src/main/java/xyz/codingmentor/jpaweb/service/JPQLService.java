@@ -17,6 +17,9 @@ import xyz.codingmentor.jpaweb.ex.EmptyParametersException;
 @Stateless
 public class JPQLService {
 
+    private static final String MOVIE_ID = "movieId";
+    private static final String ERROR_MESSAGE = "Error! Empty input";
+    
     @PersistenceContext(unitName = "jpawebPU")
     private EntityManager entityManager;
 
@@ -34,14 +37,14 @@ public class JPQLService {
             query.setParameter("title", title);
             return query.getResultList();
         }
-        throw new EmptyParametersException("Error! Empty input");
+        throw new EmptyParametersException(ERROR_MESSAGE);
     }
 
     public List<ActorEntity> getActorByMovieAndOrName(Long movieId, String firstName, String lastName) {
         if (null != firstName && null != lastName && null != movieId) {
             String selectQuery = "SELECT a FROM ActorEntity a INNER JOIN a.movies m WHERE m.id = :movieId AND a.firstName = :firstName AND a.lastName = :lastName";
             TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
-            query.setParameter("movieId", movieId);
+            query.setParameter(MOVIE_ID, movieId);
             query.setParameter("firstName", firstName);
             query.setParameter("lastName", lastName);
             return query.getResultList();
@@ -50,10 +53,10 @@ public class JPQLService {
             TypedQuery<ActorEntity> query = entityManager.createQuery(selectQuery, ActorEntity.class);
             query.setParameter("firstName", firstName);
             query.setParameter("lastName", lastName);
-            query.setParameter("movieId", movieId);
+            query.setParameter(MOVIE_ID, movieId);
             return query.getResultList();
         }
-        throw new EmptyParametersException("Error! Empty input");
+        throw new EmptyParametersException(ERROR_MESSAGE);
     }
 
     public List<ActorEntity> getActorByNationality(String nationality) {
@@ -63,16 +66,16 @@ public class JPQLService {
             query.setParameter("nationality", nationality);
             return query.getResultList();
         }
-        throw new EmptyParametersException("Error! Empty input");
+        throw new EmptyParametersException(ERROR_MESSAGE);
     }
 
     public List<TrailerEntity> getTrailerByMovie(Long movieId) {
         if (null != movieId) {
             String selectQuery = "SELECT t FROM TrailerEntity t WHERE t.movie.id = :movieId";
             TypedQuery<TrailerEntity> query = entityManager.createQuery(selectQuery, TrailerEntity.class);
-            query.setParameter("movieId", movieId);
+            query.setParameter(MOVIE_ID, movieId);
             return query.getResultList();
         }
-        throw new EmptyParametersException("Error! Empty input");
+        throw new EmptyParametersException(ERROR_MESSAGE);
     }
 }

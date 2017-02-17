@@ -2,27 +2,27 @@ package xyz.codingmentor.jpaweb.service;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import xyz.codingmentor.jpaweb.api.CategoryCRUDRepo_;
-import xyz.codingmentor.jpaweb.api.CategoryCRUDService_;
 import xyz.codingmentor.jpaweb.dto.CategoryDTO;
 import xyz.codingmentor.jpaweb.entity.CategoryEntity;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.ICategoryCRUDRepo;
+import xyz.codingmentor.jpaweb.api.ICategoryCRUDService;
 
 /**
  *
  * @author brianelete
  */
 @Stateless
-public class CategoryCRUDService implements CategoryCRUDService_ {
+public class CategoryCRUDService implements ICategoryCRUDService {
 
-    private final CategoryCRUDRepo_ repo;
+    private final ICategoryCRUDRepo repo;
 
     public CategoryCRUDService() {
         repo = null;
     }
 
     @Inject
-    public CategoryCRUDService(CategoryCRUDRepo_ categoryCRUDRepo) {
+    public CategoryCRUDService(ICategoryCRUDRepo categoryCRUDRepo) {
         this.repo = categoryCRUDRepo;
     }
 
@@ -32,8 +32,8 @@ public class CategoryCRUDService implements CategoryCRUDService_ {
     }
 
     @Override
-    public CategoryEntity read(Long Id) throws RepoException {
-        return repo.read(Id);
+    public CategoryEntity read(Long id) throws RepoException {
+        return repo.read(id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class CategoryCRUDService implements CategoryCRUDService_ {
     }
 
     @Override
-    public void delete(Long Id) throws RepoException {
-        repo.delete(Id);
+    public void delete(Long id) throws RepoException {
+        repo.delete(id);
     }
     
 }

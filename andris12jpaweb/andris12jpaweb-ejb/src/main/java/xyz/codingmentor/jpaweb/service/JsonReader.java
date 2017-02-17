@@ -11,15 +11,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import xyz.codingmentor.jpaweb.api.ActorCRUDService_;
-import xyz.codingmentor.jpaweb.api.CategoryCRUDService_;
-import xyz.codingmentor.jpaweb.api.MovieCRUDService_;
-import xyz.codingmentor.jpaweb.api.TrailerCRUDService_;
 import xyz.codingmentor.jpaweb.dto.ActorDTO;
 import xyz.codingmentor.jpaweb.dto.CategoryDTO;
 import xyz.codingmentor.jpaweb.dto.MovieDTO;
 import xyz.codingmentor.jpaweb.dto.TrailerDTO;
 import xyz.codingmentor.jpaweb.ex.RepoException;
+import xyz.codingmentor.jpaweb.api.IActorCRUDService;
+import xyz.codingmentor.jpaweb.api.ICategoryCRUDService;
+import xyz.codingmentor.jpaweb.api.ITrailerCRUDService;
+import xyz.codingmentor.jpaweb.api.IMovieCRUDService;
 
 /**
  *
@@ -30,13 +30,13 @@ import xyz.codingmentor.jpaweb.ex.RepoException;
 public class JsonReader {
 
     @Inject
-    private MovieCRUDService_ movieService;
+    private IMovieCRUDService movieService;
     @Inject
-    private ActorCRUDService_ actorService;
+    private IActorCRUDService actorService;
     @Inject
-    private CategoryCRUDService_ categoryService;
+    private ICategoryCRUDService categoryService;
     @Inject
-    private TrailerCRUDService_ trailerService;
+    private ITrailerCRUDService trailerService;
     private static final Logger LOGGER = Logger.getLogger(JsonReader.class.getName());
 
     @PostConstruct
